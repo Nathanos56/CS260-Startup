@@ -17,3 +17,4 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - JavaScript - Processes login, images, and notifications.
 
 ## Design images.
+![LoginMockUI](LoginMockUI.png)
