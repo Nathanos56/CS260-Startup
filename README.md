@@ -9,6 +9,7 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - Images are persistently stored until I approve or reject them
 - Approve or Reject images
 - Notify people when their image is accepted or rejected
+- See the three most recently approved images
 
 ## Technologies
 - HTML - Three HTML pages. One for login, one for uploading images, and one for approving/rejecting images.
