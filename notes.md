@@ -6,4 +6,5 @@ I didn't learn much because I've used Git and Git Hub before but it was a good r
 - [ ] Startup HTML
 - [ ] Startup CSS
 - [ ] Startup JavaScript
-  - [ ] Test
+- [ ] Startup WebSocket
+- [ ] Startup React
