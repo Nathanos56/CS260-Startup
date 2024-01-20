@@ -1,5 +1,5 @@
 ## Stuff I've learned
-### HTML:
+#### HTML:
 - ``<a href="https://github.com/Nathanos56/CS260-Startup">My GitHub Repo</a>``
 - ``<img src="inmglinkhere" alt="doggo" width="150">``
 
