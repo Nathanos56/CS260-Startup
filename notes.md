@@ -4,6 +4,8 @@
 - ``<img src="inmglinkhere" alt="doggo" width="150">``
 ### SSH
 - ``ssh -i [key pair file] ubuntu@[yourdomainnamehere]``
+### Other
+- ``./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup``
 
 ## Checklist:
 - [X] Set up AWS
