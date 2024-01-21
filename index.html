@@ -15,9 +15,20 @@
             </nav>
         </header>
         <main>
-
+            <ul style="list-style-type:none;>
+                <li>
+                    <label for="text">Text: </label>
+                    <input type="text" id="text" name="varText" placeholder="your name here" required pattern="[Aa].*" />
+                </li>
+                <li>
+                    <label for="file">File: </label>
+                    <input type="file" id="file" name="varFile" accept="image/*" multiple />
+                </li>
+            </ul>
+            <h2>About</h2>
             <p>On campus, students put sticky notes in their windows to write messages or draw pictures. My old monitor broke A little while ago so I removed the LCD layer and put it in my window. I am working on setting up a Raspberry Pi that will grab images from a Google Drive and display them on the LCD. I will get bored of picking images and I want some help. In this class, I will make a website where people can upload images. I can then approve or veto the images before they get sent to my Google Drive. From there, the Raspberry Pi can grab them.</p>
-        </main>
+             
+            </main>
         <footer>
             <p>Author: Nathaniel Wilson</p>
             <p><a href="https://github.com/Nathanos56/CS260-Startup">GitHub</a></p>
