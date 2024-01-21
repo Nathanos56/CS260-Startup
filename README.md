@@ -20,3 +20,7 @@ On campus, students put sticky notes in their windows to write messages or draw 
 ![MainPageMockUI](MainPageMockUI.png)
 ![LoginMockUI](LoginMockUI.png)
 ![AdminPageMockUI](AdminPageMockUI.png)
+
+## HTML Deliverable
+- Three HTML pages. Home/submit image, login, and the admin page
+- 
