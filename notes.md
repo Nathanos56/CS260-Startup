@@ -11,7 +11,7 @@
 ## Checklist:
 - [X] Set up AWS
 - [X] HTTPS
-- [ ] Startup HTML
+- [X] Startup HTML
 - [ ] Startup CSS
 - [ ] Startup JavaScript
 - [ ] Startup WebSocket
