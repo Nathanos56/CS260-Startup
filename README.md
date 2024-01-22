@@ -23,4 +23,13 @@ On campus, students put sticky notes in their windows to write messages or draw 
 
 ## HTML Deliverable
 - Three HTML pages. Home/submit image, login, and the admin page
+- Links: all of the pages have links to each other. The admin page will be locked behind the sign-in page but anyone can access it for now.
+- Text: There is a description on the main page.
+- Images: there are placeholder images on the main and admin pages.
+- Login: there is a login page for the admin.
+- DB: the recent images on the main page will be pulled from the database.
+- Websocket: the main page is notified if their image is accepted.
+- API: The Google Drive API will be called when an image is accepted on the admin page.
+
+## CSS Deliverable
 - 
