@@ -2,6 +2,7 @@
 #### HTML:
 - ``<a href="https://github.com/Nathanos56/CS260-Startup">My GitHub Repo</a>``
 - ``<img src="inmglinkhere" alt="doggo" width="150">``
+- ``<button type="button">Click Me!</button>``
 ### SSH
 - ``ssh -i [key pair file] ubuntu@[yourdomainnamehere]``
 ### Other
