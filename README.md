@@ -32,4 +32,6 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - API: The Google Drive API will be called when an image is accepted on the admin page.
 
 ## CSS Deliverable
-- 
+- Uploaded Simon CSS files to the server.
+
+## JavaScript Deliverable
