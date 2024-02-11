@@ -6,7 +6,7 @@
 ### SSH
 - ``ssh -i [key pair file] ubuntu@[yourdomainnamehere]``
 ### Other
-- ``./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup``
+- ``./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup``    Use git-bash
 
 ## Checklist:
 - [X] Set up AWS
