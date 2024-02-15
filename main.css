@@ -1,7 +1,7 @@
 body {
   display: flex;
   flex-direction: column;
-  min-width: 400px; 
+  min-width: 500px; 
 }
 
 header {
@@ -18,7 +18,7 @@ main {
   padding-right: 80px;
   /* gap: 50px; */
   /* background-color: rgb(111, 119, 131); */
-  background-color: lightslategray;
+  /* background-color: lightslategray; */
   
 }
 
@@ -28,6 +28,13 @@ main {
   flex-direction: column;
   align-items: center;
 }
+.centered-section > ul > li > h1 {
+  text-align: center;
+}
+.centered-section > ul > li > h3 {
+  text-align: center;
+}
+
 
 .about {
   width: 60vw;
@@ -45,7 +52,7 @@ main {
 }
 
 /* puts the two columns next to each other unless the screen size is too narrow*/
-@media (max-width: 805px) {
+@media (max-width: 810px) {
   main {
     flex-direction: column;
   }
