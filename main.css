@@ -81,3 +81,12 @@ menu .nav-item {
   padding: 0 0.3em;
 }
 
+
+
+/* Center the brand name */
+.navbar-brand {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
