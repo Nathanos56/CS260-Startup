@@ -1,63 +1,76 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-width: 400px;
-  }
+  display: flex;
+  flex-direction: column;
+  min-width: 400px; 
+}
 
-  header {
-    flex: 0 80px;
-  }
+header {
+  flex: 0 80px;
+}
+
 
 main {
-    flex: 1 calc(100vh - 110px);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-left: 80px;
-    padding-right: 80px;
-    gap: 50px;
-  }
-
-  /* Centered and Stacked Vertically Section */
-.centered-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  flex: 1 calc(100vh - 110px);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 80px;
+  padding-right: 80px;
+  /* gap: 50px; */
+  /* background-color: rgb(111, 119, 131); */
+  background-color: lightslategray;
   
-  /* Right-Aligned and Stacked Vertically Section */
-.right-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* margin-right: 85px; */
-  }
-
-  /* puts the two columns next to each other unless the screen size is too narrow*/
-@media (max-width: 805px) {
-    main {
-      flex-direction: column;
-    }
 }
+
+/* Centered and Stacked Vertically */
+.centered-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about {
+  width: 60vw;
+  /* word-wrap: break-word; */
+  white-space: pre-wrap;
+  overflow: hidden;
+}
+  
+/* Right-Aligned and Stacked Vertically */
+.right-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-right: 85px; */
+}
+
+/* puts the two columns next to each other unless the screen size is too narrow*/
+@media (max-width: 805px) {
+  main {
+    flex-direction: column;
+  }
+}
+
 
 footer {
-    flex: 0 30px;
-    padding-right: 20px;
-    padding-left: 20px;
+  flex: 0 30px;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
-  footer a {
-    float: right;
-  }
+footer a {
+  float: right;
+}
 
-  menu {
-    flex: 1;
-    display: flex;
-    /*  overwrite Bootstrap so the menu does not wrap */
-    flex-direction: row !important;
-    list-style: none;
-  }
+menu {
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
+}
 
-  menu .nav-item {
-    padding: 0 0.3em;
-  }
+menu .nav-item {
+  padding: 0 0.3em;
+}
+
