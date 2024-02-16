@@ -42,22 +42,26 @@
         </header>
 
         <main>
-            <form>
-                <div class="form-group">
-                    <label for="input-email">Email address</label>
-                    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter email">
-                    <br>
+            <div class="container mt-5">
+                <div class="card shadow-lg p-3 mb-5 bg-white mx-auto" style="max-width: 300px; border-radius: 1rem;">
+                    <form>
+                        <div class="form-group">
+                            <label for="input-email">Email address</label>
+                            <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <br>
+                        </div>
+                        <div class="form-group">
+                            <label for="input-password">Password</label>
+                            <input type="password" class="form-control" id="input-password" placeholder="Password">
+                            <br>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="input-password">Password</label>
-                    <input type="password" class="form-control" id="input-password" placeholder="Password">
-                    <br>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+            </div>
         </main>
         
-        <footer>
+        <footer class="fixed-bottom">
             <span class="text-reset">Author: Nathaniel Wilson</span>
             <a class="text-reset" href="https://github.com/Nathanos56/CS260-Startup">GitHub</a>
         </footer>
