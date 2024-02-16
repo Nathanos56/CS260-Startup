@@ -4,7 +4,7 @@
 - ``<img src="inmglinkhere" alt="doggo" width="150">``
 - ``<button type="button">Click Me!</button>``
 - space: ``&nbsp``
-- ``<div class="card shadow p-5 mb-5 mt-5 bg-white mx-auto" style="max-width: 70vw; border-radius: 1.3rem;"></div>``
+- **``<div class="card shadow p-5 mb-5 mt-5 bg-white mx-auto" style="max-width: 70vw; border-radius: 1.3rem;"></div>``**
 
 ### CSS
 - ``@media (max-width: 810px) {}``
