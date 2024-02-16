@@ -2,8 +2,15 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    
 }
 
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Flexible height for full viewport */
+}
 
 footer {
     flex: 0 30px;
