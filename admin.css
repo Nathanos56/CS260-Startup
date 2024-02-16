@@ -4,6 +4,10 @@ body {
     flex-direction: column;
 }
 
+main {
+    text-align: center;
+}
+
 footer {
     flex: 0 30px;
     padding-right: 20px;
@@ -18,4 +22,6 @@ footer a {
     margin-left: 6vw;
     margin-right: 6vw; 
 }
-  
+
+
+
