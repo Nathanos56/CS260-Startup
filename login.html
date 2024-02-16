@@ -8,7 +8,7 @@
         <meta charset="UTF-8" />
         <!-- Tell browsers not to scale the viewport automatically -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="login.css" />
 
         <!-- Include bootstrap CSS framework -->
         <link
@@ -42,25 +42,19 @@
         </header>
 
         <main>
-            <ul style="list-style-type:none;"">
-                <li>
-                    <h2>Login</h2>
-                </li>
-                <br>
-                <li>
-                    <label for="text">Email: </label>
-                    <input type="text" id="text" name="varText" placeholder="type your email" required pattern="[Aa].*" />
-                </li>
-                <br>
-                <li>
-                    <label for="password">Password: </label>
-                    <input type="password" id="password" name="varPassword"/>
-                </li>
-                <br>
-                <li>
-                    <button type="button">Sign in</button>
-                </li>
-            </ul>
+            <form>
+                <div class="form-group">
+                    <label for="input-email">Email address</label>
+                    <input type="email" class="form-control" id="input-email" aria-describedby="emailHelp" placeholder="Enter email">
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="input-password">Password</label>
+                    <input type="password" class="form-control" id="input-password" placeholder="Password">
+                    <br>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
         </main>
         
         <footer>
