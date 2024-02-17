@@ -46,6 +46,9 @@ main {
   .empty-section {
     display: none;
   }
+  .centered-section {
+    width: 100vw;
+  }
 }
 
 
