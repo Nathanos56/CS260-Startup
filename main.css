@@ -1,18 +1,19 @@
 main {
   flex: 1 calc(100vh - 110px);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-left: 80px;
-  padding-right: 80px;
+  justify-content: space-around;
+  /* align-items: center; */
+  justify-content: center;
+  /* padding-left: 80px; */
+  /* padding-right: 80px; */
   min-height: 100vh;
   /* gap: 50px; */
   /* background-color: rgb(111, 119, 131); */
   /* background-color: lightslategray; */
-  
 }
 
 .empty-section {
+  display: flexbox;
   position: relative;
   width: 15vw; /* Assuming equal width for all sections */
   /* margin-left: -100%; Hide the empty section off-screen */
@@ -35,11 +36,15 @@ main {
   flex-direction: column;
   align-items: center;
   width: 15vw;
+  /* text-align: center; */
+  white-space: nowrap;
+  
+  /* margin: auto; */
   /* margin-right: 85px; */
 }
 
 /* puts the two columns next to each other unless the screen size is too narrow*/
-@media (max-width: 810px) {
+@media (max-width: 980px) {
   main {
     flex-direction: column;
   }
@@ -49,7 +54,13 @@ main {
   .centered-section {
     width: 100vw;
   }
-}
+  .about {
+    width: 80vw;
+  }
+  .right-section {
+    margin: auto;
+  }
+} 
 
 
 
