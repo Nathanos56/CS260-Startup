@@ -2,12 +2,8 @@ main {
   flex: 1 calc(100vh - 110px);
   display: flex;
   justify-content: space-around;
-  /* align-items: center; */
   justify-content: center;
-  /* padding-left: 80px; */
-  /* padding-right: 80px; */
   min-height: 100vh;
-  /* gap: 50px; */
   /* background-color: rgb(111, 119, 131); */
   /* background-color: lightslategray; */
 }
@@ -15,8 +11,7 @@ main {
 .empty-section {
   display: flexbox;
   position: relative;
-  width: 15vw; /* Assuming equal width for all sections */
-  /* margin-left: -100%; Hide the empty section off-screen */
+  width: 15vw;
 }
 
 
@@ -36,11 +31,9 @@ main {
   flex-direction: column;
   align-items: center;
   width: 15vw;
-  /* text-align: center; */
   white-space: nowrap;
-  
-  /* margin: auto; */
-  /* margin-right: 85px; */
+  position: sticky;
+  top: 5px;
 }
 
 /* puts the two columns next to each other unless the screen size is too narrow*/
