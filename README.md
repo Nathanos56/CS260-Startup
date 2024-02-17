@@ -33,5 +33,14 @@ On campus, students put sticky notes in their windows to write messages or draw 
 
 ## CSS Deliverable
 - Uploaded Simon CSS files to the server.
+- There is a link to my GitHub in the footer on all of the pages.
+- Here are the notes on what I added for this deliverable.
+- I have deployed it to the server.
+- I have styled the header, footer, and body on all of the pages.
+- There are navigation elements in the header.
+- The "recent images" column on the home page shifts to the bottom of the page when the window gets too narrow.
+- There are elements including the buttons and cards on all of the pages.
+- There are placeholder images until I can replace them with user-generated images.
 
 ## JavaScript Deliverable
+- 
