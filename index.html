@@ -15,6 +15,7 @@
         <!-- include confetti -->
         <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Include bootstrap CSS framework -->
         <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
@@ -103,6 +104,45 @@
                         <img src="/stockImage.png" alt="img3" width="150">
                     </li>
                 </ul>
+
+                <div class="dropdown dropdown-end bd-mode-toggle position-fixed bottom-0 end-0 mb-3 me-3">
+                    <button class="btn btn-bd-primary py-2 d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-label="Toggle theme">
+                      <svg class="bi theme-icon-active my-1" width="1em" height="1em"><use href="/bootstrap-icons/sun-fill"></use></svg>
+                      <span class="visually-hidden">Toggle theme</span>
+                    </button>
+                    <ul class="dropdown-menu shadow">
+                      <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
+                          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="/bootstrap-icons/sun-fill"></use></svg>
+                          Light <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="/bootstrap-icons/check2"></use></svg>
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="/bootstrap-icons/moon-stars-fill"></use></svg>
+                          Dark <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="/bootstrap-icons/check2"></use></svg>
+                        </button>
+                      </li>
+                      <li>
+                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
+                          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="/bootstrap-icons/circle-half"></use></svg>
+                          Auto <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="/bootstrap-icons/check2"></use></svg>
+                        </button>
+                      </li>
+                    </ul>
+                </div>
+
+                <div class="dropdown dropdown-end bd-mode-toggle position-fixed bottom-0 end-0 mb-3 me-3">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg class="bi theme-icon-active my-1" width="1em" height="1em"><use href="/bootstrap-icons/sun-fill"></use></svg>
+                    </button>
+                    <ul class="dropdown-menu shadow">
+                        <li><button class="dropdown-item" type="button">Action</button></li>
+                        <li><button class="dropdown-item" type="button">Another action</button></li>
+                        <li><button class="dropdown-item" type="button">Something else here</button></li>
+                      </ul>
+                </div>
+                  
             </div>
 
             
