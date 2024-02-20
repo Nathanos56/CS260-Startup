@@ -1,6 +1,12 @@
-const confettiButton = document.getElementById("submit-confetti");
+const submit_confetti_button = document.getElementById("submit-confetti");
 
-confettiButton.addEventListener('click', () => {
+submit_confetti_button.addEventListener('click', () => {
+    getName();
+    initialConfetti();
+    randomConfetti();
+});
+
+function initialConfetti() {
     // for testing confetti options
     // default values are commented
     const testConfettiSettings = {
@@ -20,8 +26,9 @@ confettiButton.addEventListener('click', () => {
 
     // Create initial confetti explosion
     confetti(testConfettiSettings);
+};
 
-
+function randomConfetti() {
     const interval = 200; // interval between explosions in ms
     const numExplosions = 5;
     let count = 0   // Counter for tracking explosions
@@ -36,14 +43,55 @@ confettiButton.addEventListener('click', () => {
                 x: Math.random(),
                 // since they fall down, start a bit higher than random
                 y: Math.random() - 0.2
-                    },
-            scalar: 1,           // 1      size of particles
+            },
+            scalar: .8,           // 1      size of particles
             colors: ['#f00', '#00f', '#0f0'], // Adjust the confetti colors
-            });
+        });
         count++;
 
         if (count >= numExplosions) {
-        clearInterval(intervalId);
+            clearInterval(intervalId);
         }
     }, interval);
-});
+}
+
+
+
+
+function getName() {
+    const nameEl = document.querySelector("#name");
+    localStorage.setItem("userName", nameEl.value);
+    // window.location.href = "play.html";
+}
+
+
+function saveImage() {
+
+}
+
+
+function showImage() {
+
+}
+
+function previewImage(event, previewId) {
+    const imagePreview = document.getElementById(previewId);
+  
+    // if file is selected
+    if (event.target.files && event.target.files[0]) {  //checks if the object exists then if there's stuff in it
+        // read file
+        const reader = new FileReader();
+
+        // if file successfully read
+        reader.onload = (e) => {
+            // set the preview image source to the loaded image
+            imagePreview.src = e.target.result;
+        };
+
+        // read file as DataURL
+        reader.readAsDataURL(event.target.files[0]);
+    } else {
+        // no file selected, put placeholder image back
+        imagePreview.src = "https://mdbootstrap.com/img/Photos/Others/placeholder.jpg";
+    }
+}
