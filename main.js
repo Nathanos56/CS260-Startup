@@ -95,3 +95,29 @@ function previewImage(event, previewId) {
         imagePreview.src = "https://mdbootstrap.com/img/Photos/Others/placeholder.jpg";
     }
 }
+
+
+const nav = document.querySelector('.navbar');
+const drop = document.querySelector('.dropdown-menu')
+const lightSwitch = document.getElementById('lightSwitch');
+const darkSwitch = document.getElementById('darkSwitch');
+
+function toggleMode(mode) {
+    switch (mode) {
+      case "light":
+        nav.classList.remove('navbar-dark', 'bg-dark');
+        nav.classList.add('navbar-light', 'bg-light');
+        drop.classList.remove('bg-dark');
+        drop.classList.add('bg-light');
+        break;
+      case "dark":
+        nav.classList.remove('navbar-light', 'bg-light');
+        nav.classList.add('navbar-dark', 'bg-dark');
+        drop.classList.remove('bg-light');
+        drop.classList.add('bg-dark');
+        break;
+    }
+  }
+  
+  lightSwitch.addEventListener('click', () => toggleMode("light"));
+  darkSwitch.addEventListener('click', () => toggleMode("dark"));
