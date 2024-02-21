@@ -1,21 +1,23 @@
+body {
+  min-height: 100vh;
+}
+
 main {
   flex: 1 calc(100vh - 110px);
   display: flex;
   justify-content: space-around;
   justify-content: center;
-  min-height: 100vh;
   /* background-color: rgb(111, 119, 131); */
   /* background-color: lightslategray; */
 }
-
+ 
+/* left section is empty */
 .empty-section {
   display: flexbox;
   position: relative;
   width: 15vw;
 }
 
-
-/* Centered and Stacked Vertically */
 .centered-section {
   display: flex;
   flex-direction: column;
@@ -24,8 +26,6 @@ main {
   width: 60vw; 
 }
 
-  
-/* Right-Aligned and Stacked Vertically */
 .right-section {
   display: flex;
   flex-direction: column;
@@ -63,13 +63,9 @@ footer {
   min-height: 50px;
 }
 
-footer a {
-  float: right;
-}
-
 .navbar-nav {
-  margin-left: 6vw;
-  margin-right: 6vw; 
+  margin-left: 3vw;
+  margin-right: 3vw; 
 }
 
 

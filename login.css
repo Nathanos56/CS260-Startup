@@ -1,15 +1,25 @@
+/* Weirdest thing I've ever seen */
+/* I am documenting here so I can talk to a ta or something later */
+/* The navbar is shifted to the right on the sign in page */
+/* The header is the exact same on all the pages except for which link is active */
+/* I have tried copying and pasting the header from the other pages to no avail */
+/* I can fix it by chainging the body section below to be main */
+/* that has its own issues. try it and see */
+/* the odd thing is that commenting out the min-height doesn't fix it */
+/* only moving the min-height from the body section to the main section fixes it */
+/* I have no idea how to fix it */
+
 body {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
 }
 
-.container {
+/* .container {
     display: flex;
+    width: 80vw;
     justify-content: center;
-    align-items: center;
-    /* height: 80vh; */
-}
+    justify-content: space-between;
+    justify-content: flex-start;
+} */
 
 footer {
     padding-right: 20px;
@@ -17,16 +27,15 @@ footer {
     min-height: 50px;
 }
   
-footer a {
-    float: right;
-}
-  
 .navbar-nav {
-    margin-left: 6vw;
-    margin-right: 6vw; 
+    margin-left: 3vw;
+    margin-right: 3vw; 
 }
+
+
+
+/* experimental */
 
 /* .nav-link.active {
     border-bottom: 2px solid lightgray;
-    border-bottom: 2px solid #0d6dfd0a;
   } */

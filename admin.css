@@ -14,16 +14,7 @@ footer {
     min-height: 50px;
 }
   
-footer a {
-    float: right;
-}
-  
 .navbar-nav {
-    margin-left: 6vw;
-    margin-right: 6vw; 
+    margin-left: 3vw;
+    margin-right: 3vw; 
 }
-
-
-/* .nav-link.active {
-    border-bottom: 2px solid lightgray;
-} */
