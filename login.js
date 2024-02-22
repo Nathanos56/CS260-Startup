@@ -1,15 +1,16 @@
-const emailInput = document.getElementById('input-email');
-const placeholderText = document.querySelector('.form-group .placeholder-text');
+// Select both username and password input fields
+const inputFields = document.querySelectorAll('.form-control');
 
-emailInput.addEventListener('focus', () => {
-  placeholderText.style.opacity = 0.5;
-  placeholderText.style.transform = 'translate(-7px, -25px) scale(0.8)';
-  emailInput.style.border = '1px solid #ccc';
-});
+for (const inputField of inputFields) {
+  const placeholderText = inputField.nextElementSibling;
 
-emailInput.addEventListener('blur', () => {
-  placeholderText.style.opacity = .7;
-  placeholderText.style.transform = 'translate(0px, 0px) scale(1)';
-  emailInput.style.border = 'none';
+  inputField.addEventListener('focus', () => {
+    placeholderText.style.opacity = 0.5;
+    placeholderText.style.transform = 'translate(-7px, -25px) scale(0.8)';
+  });
 
-});
+  inputField.addEventListener('blur', () => {
+    placeholderText.style.opacity = 0.7;
+    placeholderText.style.transform = 'translate(0px, 0px) scale(1)';
+  });
+}

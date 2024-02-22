@@ -58,15 +58,16 @@ form .form-control {
 
 .form-group .placeholder-text {
     position: absolute;
-    top: 50%; /* Position vertically in the middle */
-    left: 12%; /* Offset from the left edge */
+    top: 50%; 
+    left: 12%; 
     opacity: 0.7;
     font-size: 1em;
     transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, border 0.2s ease-in-out;
     color: black;
 }
 
-.form-group input:focus {
-    border: 1px solid #ccc !important; /* Add border color here */
-}
+/* .form-group input:focus {
+    border: 1px solid #ccc !important; 
+}  */
   
+
