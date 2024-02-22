@@ -100,7 +100,14 @@ function previewImage(event, previewId) {
 
 const allHTML = document.getElementById('html');
 const nav = document.querySelector('.navbar');
-const drop = document.querySelector('.dropdown-menu')
+const drop = document.querySelector('.dropdown-menu');
+const card = document.querySelector('.card');
+
+const sun = document.getElementById('sun');
+const moon = document.getElementById('moon');
+const circle_half = document.getElementById('circle-half');
+// const stock_img = document.querySelectorAll('.stockImage');
+
 const lightSwitch = document.getElementById('lightSwitch');
 const darkSwitch = document.getElementById('darkSwitch');
 
@@ -114,6 +121,13 @@ function toggleMode(mode) {
         drop.classList.add('bg-light');
         darkSwitch.classList.remove('active');
         lightSwitch.classList.add('active');
+        card.classList.remove('bg-dark');
+        card.classList.add('bg-white');
+
+        sun.classList.add('invert');
+        moon.classList.remove('invert');
+        circle_half.classList.remove('invert');
+        // stock_img.classList.remove('invert', 'icon-opacity')
         break;
       case "dark":
         nav.classList.remove('navbar-light', 'bg-light');
@@ -122,6 +136,13 @@ function toggleMode(mode) {
         drop.classList.add('bg-dark');
         lightSwitch.classList.remove('active');
         darkSwitch.classList.add('active');
+        card.classList.remove('bg-white');
+        card.classList.add('bg-dark');
+        
+        sun.classList.add('invert');
+        moon.classList.add('invert');
+        circle_half.classList.add('invert')
+        // stock_img.classList.add('invert', 'icon-opacity')
         break;
     }
   }

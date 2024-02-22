@@ -36,4 +36,37 @@ footer {
 
 /* .nav-link.active {
     border-bottom: 2px solid lightgray;
-  } */
+} */
+
+form .form-control {
+    border: none;
+    border-bottom: 2px solid #434a522c !important;
+    border-radius:0;
+    color: white;
+}
+
+.btn-primary {
+    width: 100%;
+}
+
+.lock {
+    text-align:center;
+    padding:15px 0 20px;
+    font-size:100px;
+    color:#2980ef;
+}
+
+.form-group .placeholder-text {
+    position: absolute;
+    top: 50%; /* Position vertically in the middle */
+    left: 12%; /* Offset from the left edge */
+    opacity: 0.7;
+    font-size: 1em;
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, border 0.2s ease-in-out;
+    color: black;
+}
+
+.form-group input:focus {
+    border: 1px solid #ccc !important; /* Add border color here */
+}
+  
