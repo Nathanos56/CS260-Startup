@@ -32,19 +32,6 @@ footer {
 
 
 
-/* experimental */
-
-/* .nav-link.active {
-    border-bottom: 2px solid lightgray;
-} */
-
-form .form-control {
-    border: none;
-    border-bottom: 2px solid #434a522c !important;
-    border-radius:0;
-    color: white;
-}
-
 .btn-primary {
     width: 100%;
 }
@@ -66,8 +53,51 @@ form .form-control {
     color: black;
 }
 
-/* .form-group input:focus {
-    border: 1px solid #ccc !important; 
-}  */
-  
+input {
+    border: unset;
+    background: unset;
+    border-bottom: 2px solid #434a522c;
+    border-radius:0;
+    background: #fff;
+    border-radius: 5px;
+    width: 100%;
+
+    padding: 16px;
+    margin-top: 20px;
+    font-size: 17px;
+}
+
+label {
+    all: unset;
+    display: block;
+    position: absolute;
+    padding: 0 5px;
+    width: auto;
+    color: #5f6368;
+    background: #fff;
+    transition: all 150ms ease;
+    transform: translate(12px, -37px);
+}
+
+
+/* experimental */
+
+
+/* outlones text field when focused */
+input:focus {
+    outline: none;
+    padding: 15px;
+    border: 2px solid #1a73e8;
+}
+/* moves label */
+input:not(:placeholder-shown) + label, input:focus + label {
+    transform: translate(8px, -68px);
+    font-size: 13px;
+    width: auto;
+}
+/* colors the label */
+input:focus + label {
+    color: #1a73e8; 
+}
+
 
