@@ -69,12 +69,6 @@ footer {
   margin-right: 3vw; 
 }
 
-.dropdown {
-  position: sticky !important;
-  bottom: 0; 
-  right: 0 !important;
-}
-
 
 /* DarkMode */
 
