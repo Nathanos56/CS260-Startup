@@ -118,6 +118,7 @@ const darkSwitch = document.getElementById('darkSwitch');
 const autoSwitch = document.getElementById('autoSwitch');
 
 // changes the icons for the dark mode dropdown
+// this is so the auto mode works correctly
 function dropIcons(mode) {
     switch (mode) {
         case "auto":
@@ -226,9 +227,6 @@ else {
 
 // Todo list for dark mode toggle:
 // Keep window from flashing white when loaded
-// When auto is selected, make the auto button active
-// set auto as the default active in html
-
 // make dark mode look prettier
 //   fix name field on dark mode
 //   change confetti colors
