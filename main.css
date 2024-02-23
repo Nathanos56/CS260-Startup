@@ -69,6 +69,8 @@ footer {
 }
 
 
+/* DarkMode */
+
 .checkmark {
   display: none;
 }
@@ -93,10 +95,6 @@ footer {
   box-shadow: 0.05rem 0.1rem .5rem rgba(0, 0, 0, 0.155);
 }
 
-#name-group {
-  text-align: left;
-}
-
 #name-field {
   border: unset;
   background: unset;
@@ -113,7 +111,7 @@ footer {
 #name-label {
   all: unset;
   display: block;
-  position: relative;
+  position: absolute;
   padding: 0 5px;
   width: 7.75em;
   color: #5f6368;
