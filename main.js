@@ -165,5 +165,6 @@ function toggleMode(mode) {
 // Change main icon
 // Keep window from flashing white when loaded
 // When auto is selected, make the auto button active
+// Save settings in brower storage
 // set auto as the default active in html
 // make dark mode look prettier
