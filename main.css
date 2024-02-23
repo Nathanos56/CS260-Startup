@@ -9,6 +9,7 @@ main {
   display: flex;
   justify-content: space-around;
   justify-content: center;
+  /* position: relative; */
   /* background-color: rgb(111, 119, 131); */
   /* background-color: lightslategray; */
 }
@@ -66,6 +67,12 @@ footer {
 .navbar-nav {
   margin-left: 3vw;
   margin-right: 3vw; 
+}
+
+.dropdown {
+  position: sticky !important;
+  bottom: 0; 
+  right: 0 !important;
 }
 
 
@@ -140,3 +147,5 @@ footer {
 #name-field:focus + #name-label {
   color: #1a73e8; 
 }
+
+

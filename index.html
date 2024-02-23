@@ -108,28 +108,30 @@
                         <img class="stockImage" src="/stockImage.png" alt="img3" width="150">
                     </li>
                 </ul>
-
-                <div class="dropdown dropdown-end bd-mode-toggle position-fixed bottom-0 end-0 mb-3 me-3">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img id="dropdown-img-main" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
-                    </button>
-                    <ul class="dropdown-menu shadow">
-                        <li><button id="lightSwitch" type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
-                            <img id="sun" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="invert icon-opacity">
-                            &nbsp Light <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
-                        </button></li>
-                        <li><button id="darkSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                            <img id="moon" src="bootstrap-icons/moon-stars-fill.svg" width="16" height="16" class="icon-opacity">
-                            &nbsp Dark <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
-                        </button></li>
-                        <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
-                            <img id="circle-half" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="icon-opacity" >
-                            &nbsp Auto <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
-                        </button></li>
-                    </ul>
-                </div>
             </div>
 
+           <!-- position-sticky does the same as sticky bottom -->
+           <!-- align-items-end float-right bottom-0 end-0 me-3    these should all align it on the right of the screen but it's not doing that-->
+            <div class="dropdown dropdown-end bd-mode-toggle sticky-bottom align-items-end float-right bottom-0 end-0 mb-3 me-3">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img id="dropdown-img-main" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
+                </button>
+                <ul class="dropdown-menu shadow">
+                    <li><button id="lightSwitch" type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
+                        <img id="sun" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="invert icon-opacity">
+                        &nbsp Light <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                    </button></li>
+                    <li><button id="darkSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                        <img id="moon" src="bootstrap-icons/moon-stars-fill.svg" width="16" height="16" class="icon-opacity">
+                        &nbsp Dark <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                    </button></li>
+                    <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
+                        <img id="circle-half" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="icon-opacity" >
+                        &nbsp Auto <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                    </button></li>
+                </ul>
+            </div>
+            
             
         </main>
 

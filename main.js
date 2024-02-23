@@ -182,4 +182,7 @@ if (localStorage.getItem("lightSwitch")) {
 // Keep window from flashing white when loaded
 // When auto is selected, make the auto button active
 // set auto as the default active in html
+
 // make dark mode look prettier
+//   fix name field on dark mode
+//   change confetti colors
