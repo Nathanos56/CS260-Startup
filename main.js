@@ -117,17 +117,48 @@ const lightSwitch = document.getElementById('lightSwitch');
 const darkSwitch = document.getElementById('darkSwitch');
 const autoSwitch = document.getElementById('autoSwitch');
 
-function toggleMode(mode) {
+// changes the icons for the dark mode dropdown
+function dropIcons(mode) {
     switch (mode) {
         case "auto":
             darkSwitch.classList.remove('active');
             lightSwitch.classList.remove('active');
             autoSwitch.classList.add('active');
+
             sun.classList.remove('invert');
             moon.classList.remove('invert');
             circle_half.classList.add('invert');
-            let originalMode = mode;
-            mode = isDarkMode();
+            drop_img_main.src = 'bootstrap-icons/circle-half.svg';
+            localStorage.setItem("lightSwitch", "auto");
+            break;
+        case 'light':
+            darkSwitch.classList.remove('active');
+            autoSwitch.classList.remove('active');
+            lightSwitch.classList.add('active');
+
+            sun.classList.add('invert');
+            moon.classList.remove('invert');
+            circle_half.classList.remove('invert');
+            drop_img_main.src = 'bootstrap-icons/sun-fill.svg';
+            localStorage.setItem("lightSwitch", "light");
+            break;
+        case 'dark':
+            lightSwitch.classList.remove('active');
+            autoSwitch.classList.remove('active');
+            darkSwitch.classList.add('active');
+
+            sun.classList.add('invert');
+            moon.classList.add('invert');
+            circle_half.classList.add('invert');
+
+            drop_img_main.src = 'bootstrap-icons/moon-stars-fill.svg';
+            localStorage.setItem("lightSwitch", "dark");
+            break;
+    }
+}
+
+function toggleMode(mode) {
+    switch (mode) {
         case "light":
             allHTML.dataset.bsTheme = mode;
             nav.classList.remove('navbar-dark', 'bg-dark');
@@ -138,18 +169,6 @@ function toggleMode(mode) {
             card.classList.add('bg-white');
             
             // stock_img.classList.remove('invert', 'icon-opacity');
-
-            drop_img_main.src = 'bootstrap-icons/sun-fill.svg';
-            localStorage.setItem("lightSwitch", "light");
-
-            if (originalMode !== 'auto') {
-                darkSwitch.classList.remove('active');
-                autoSwitch.classList.remove('active');
-                lightSwitch.classList.add('active');
-                sun.classList.add('invert');
-                moon.classList.remove('invert');
-                circle_half.classList.remove('invert');
-            }
             break;
         case "dark":
             allHTML.dataset.bsTheme = mode;
@@ -161,36 +180,48 @@ function toggleMode(mode) {
             card.classList.add('bg-dark');
             
             // stock_img.classList.add('invert', 'icon-opacity');
-
-            drop_img_main.src = 'bootstrap-icons/moon-stars-fill.svg';
-            localStorage.setItem("lightSwitch", "dark");
-
-            if (originalMode != 'auto') {
-                lightSwitch.classList.remove('active');
-                autoSwitch.classList.remove('active');
-                darkSwitch.classList.add('active');
-                sun.classList.add('invert');
-                moon.classList.add('invert');
-                circle_half.classList.add('invert');
-            }
             break;
     }
 }
 
-function isDarkMode() {
+function DarkModeDefault() {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {return "dark"} else {return "light"}
 }
-  
-lightSwitch.addEventListener('click', () => toggleMode("light"));
-darkSwitch.addEventListener('click', () => toggleMode("dark"));
-autoSwitch.addEventListener('click', () => toggleMode('auto'));
+
+// Button listeners
+lightSwitch.addEventListener('click', () => {
+    toggleMode("light");
+    dropIcons('light');
+});
+darkSwitch.addEventListener('click', () => {
+    toggleMode("dark");
+    dropIcons('dark');
+});
+autoSwitch.addEventListener('click', () => {
+    toggleMode(DarkModeDefault());
+    dropIcons('auto');
+});
 
 // checks darkmode settings when the page is opened
+// checks local storage first then checks default
+// if no default, sets it to white
 if (localStorage.getItem("lightSwitch")) {
-    toggleMode(localStorage.getItem("lightSwitch"));
-} else {
-    toggleMode('auto');
+    const mode = localStorage.getItem("lightSwitch");
+    if (mode === 'auto') {
+        toggleMode(DarkModeDefault());
+        dropIcons('auto');
+    } else {
+        toggleMode(mode);
+        dropIcons(mode);
+    }
+} else if (DarkModeDefault) {
+    toggleMode(DarkModeDefault());
+    dropIcons('auto');
 }
+else {
+    toggleMode('light');
+    dropIcons('light');
+};
     
 
 // Todo list for dark mode toggle:
