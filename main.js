@@ -120,25 +120,36 @@ const autoSwitch = document.getElementById('autoSwitch');
 function toggleMode(mode) {
     switch (mode) {
         case "auto":
-            
+            darkSwitch.classList.remove('active');
+            lightSwitch.classList.remove('active');
+            autoSwitch.classList.add('active');
+            sun.classList.remove('invert');
+            moon.classList.remove('invert');
+            circle_half.classList.add('invert');
+            let originalMode = mode;
+            mode = isDarkMode();
         case "light":
             allHTML.dataset.bsTheme = mode;
             nav.classList.remove('navbar-dark', 'bg-dark');
             nav.classList.add('navbar-light', 'bg-light');
             drop.classList.remove('bg-dark');
             drop.classList.add('bg-light');
-            darkSwitch.classList.remove('active');
-            lightSwitch.classList.add('active');
             card.classList.remove('bg-dark');
             card.classList.add('bg-white');
-
-            sun.classList.add('invert');
-            moon.classList.remove('invert');
-            circle_half.classList.remove('invert');
+            
             // stock_img.classList.remove('invert', 'icon-opacity');
 
             drop_img_main.src = 'bootstrap-icons/sun-fill.svg';
             localStorage.setItem("lightSwitch", "light");
+
+            if (originalMode !== 'auto') {
+                darkSwitch.classList.remove('active');
+                autoSwitch.classList.remove('active');
+                lightSwitch.classList.add('active');
+                sun.classList.add('invert');
+                moon.classList.remove('invert');
+                circle_half.classList.remove('invert');
+            }
             break;
         case "dark":
             allHTML.dataset.bsTheme = mode;
@@ -146,35 +157,39 @@ function toggleMode(mode) {
             nav.classList.add('navbar-dark', 'bg-dark');
             drop.classList.remove('bg-light');
             drop.classList.add('bg-dark');
-            lightSwitch.classList.remove('active');
-            darkSwitch.classList.add('active');
             card.classList.remove('bg-white');
             card.classList.add('bg-dark');
             
-            sun.classList.add('invert');
-            moon.classList.add('invert');
-            circle_half.classList.add('invert')
             // stock_img.classList.add('invert', 'icon-opacity');
 
             drop_img_main.src = 'bootstrap-icons/moon-stars-fill.svg';
             localStorage.setItem("lightSwitch", "dark");
+
+            if (originalMode != 'auto') {
+                lightSwitch.classList.remove('active');
+                autoSwitch.classList.remove('active');
+                darkSwitch.classList.add('active');
+                sun.classList.add('invert');
+                moon.classList.add('invert');
+                circle_half.classList.add('invert');
+            }
             break;
     }
 }
 
 function isDarkMode() {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {return "dark"} else {return "light"};
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {return "dark"} else {return "light"}
 }
   
 lightSwitch.addEventListener('click', () => toggleMode("light"));
 darkSwitch.addEventListener('click', () => toggleMode("dark"));
-autoSwitch.addEventListener('click', () => toggleMode(isDarkMode()));
+autoSwitch.addEventListener('click', () => toggleMode('auto'));
 
 // checks darkmode settings when the page is opened
 if (localStorage.getItem("lightSwitch")) {
     toggleMode(localStorage.getItem("lightSwitch"));
 } else {
-    toggleMode(isDarkMode());
+    toggleMode('auto');
 }
     
 
