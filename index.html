@@ -76,11 +76,10 @@
                                 <input type="file" class="form-control d-none" id="customFile1" onchange="previewImage(event, 'selectedImage')" />
                             </div>
                             &nbsp &nbsp 
-                            <!-- <button type="submit" id="submit-confetti" class="btn btn-primary">Upload</button> -->
                             <button type="button" id="submit-confetti" class="btn btn-primary">Upload</button>
                         </div>
                         <div>
-                            <br>
+                            <br> <br>
                             <h3>Your image was accepted, user!</h3>
                         </div>
                         
@@ -110,33 +109,6 @@
                     </li>
                 </ul>
 
-                <!-- <div class="dropdown dropdown-end bd-mode-toggle position-fixed bottom-0 end-0 mb-3 me-3">
-                    <button class="btn btn-bd-primary py-2 d-flex align-items-center" type="button" data-bs-toggle="dropdown" aria-label="Toggle theme">
-                      <svg class="bi theme-icon-active my-1" width="1em" height="1em"><use href="/bootstrap-icons/sun-fill"></use></svg>
-                      <span class="visually-hidden">Toggle theme</span>
-                    </button>
-                    <ul class="dropdown-menu shadow">
-                      <li>
-                        <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
-                          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="/bootstrap-icons/sun-fill"></use></svg>
-                          Light <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="/bootstrap-icons/check2"></use></svg>
-                        </button>
-                      </li>
-                      <li>
-                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="/bootstrap-icons/moon-stars-fill"></use></svg>
-                          Dark <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="/bootstrap-icons/check2"></use></svg>
-                        </button>
-                      </li>
-                      <li>
-                        <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
-                          <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="/bootstrap-icons/circle-half"></use></svg>
-                          Auto <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="/bootstrap-icons/check2"></use></svg>
-                        </button>
-                      </li>
-                    </ul>
-                </div> -->
-
                 <div class="dropdown dropdown-end bd-mode-toggle position-fixed bottom-0 end-0 mb-3 me-3">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
@@ -150,13 +122,12 @@
                             <img id="moon" src="bootstrap-icons/moon-stars-fill.svg" width="16" height="16" class="icon-opacity">
                             &nbsp Dark <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
                         </button></li>
-                        <li><button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
+                        <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
                             <img id="circle-half" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="icon-opacity" >
                             &nbsp Auto <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
                         </button></li>
                     </ul>
                 </div>
-                  
             </div>
 
             

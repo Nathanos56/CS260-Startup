@@ -129,12 +129,14 @@ footer {
   border: 2px solid #1a73e8;
 }
 /* moves label */
+/* when the placeholder is not shown (the user has typed something) or when the field is focused */
 #name-field:not(:placeholder-shown) + #name-label, #name-field:focus + #name-label {
   transform: translate(8px, -68px);
   font-size: 13px !important;
   width: 7.75em;
 }
 /* colors the label */
+/* this doesn't have the placeholder-shown so the text turns back to black even if the user has typed in the box */
 #name-field:focus + #name-label {
   color: #1a73e8; 
 }

@@ -59,7 +59,7 @@ function randomConfetti() {
 
 
 function getName() {
-    const nameEl = document.querySelector("#name");
+    const nameEl = document.querySelector("#name-field");
     localStorage.setItem("userName", nameEl.value);
     // window.location.href = "play.html";
 }
@@ -110,42 +110,60 @@ const circle_half = document.getElementById('circle-half');
 
 const lightSwitch = document.getElementById('lightSwitch');
 const darkSwitch = document.getElementById('darkSwitch');
+const autoSwitch = document.getElementById('autoSwitch');
 
 function toggleMode(mode) {
-    allHTML.dataset.bsTheme = mode;
     switch (mode) {
-      case "light":
-        nav.classList.remove('navbar-dark', 'bg-dark');
-        nav.classList.add('navbar-light', 'bg-light');
-        drop.classList.remove('bg-dark');
-        drop.classList.add('bg-light');
-        darkSwitch.classList.remove('active');
-        lightSwitch.classList.add('active');
-        card.classList.remove('bg-dark');
-        card.classList.add('bg-white');
+        case "auto":
+            
+        case "light":
+            allHTML.dataset.bsTheme = mode;
+            nav.classList.remove('navbar-dark', 'bg-dark');
+            nav.classList.add('navbar-light', 'bg-light');
+            drop.classList.remove('bg-dark');
+            drop.classList.add('bg-light');
+            darkSwitch.classList.remove('active');
+            lightSwitch.classList.add('active');
+            card.classList.remove('bg-dark');
+            card.classList.add('bg-white');
 
-        sun.classList.add('invert');
-        moon.classList.remove('invert');
-        circle_half.classList.remove('invert');
-        // stock_img.classList.remove('invert', 'icon-opacity')
-        break;
-      case "dark":
-        nav.classList.remove('navbar-light', 'bg-light');
-        nav.classList.add('navbar-dark', 'bg-dark');
-        drop.classList.remove('bg-light');
-        drop.classList.add('bg-dark');
-        lightSwitch.classList.remove('active');
-        darkSwitch.classList.add('active');
-        card.classList.remove('bg-white');
-        card.classList.add('bg-dark');
-        
-        sun.classList.add('invert');
-        moon.classList.add('invert');
-        circle_half.classList.add('invert')
-        // stock_img.classList.add('invert', 'icon-opacity')
-        break;
+            sun.classList.add('invert');
+            moon.classList.remove('invert');
+            circle_half.classList.remove('invert');
+            // stock_img.classList.remove('invert', 'icon-opacity')
+            break;
+        case "dark":
+            allHTML.dataset.bsTheme = mode;
+            nav.classList.remove('navbar-light', 'bg-light');
+            nav.classList.add('navbar-dark', 'bg-dark');
+            drop.classList.remove('bg-light');
+            drop.classList.add('bg-dark');
+            lightSwitch.classList.remove('active');
+            darkSwitch.classList.add('active');
+            card.classList.remove('bg-white');
+            card.classList.add('bg-dark');
+            
+            sun.classList.add('invert');
+            moon.classList.add('invert');
+            circle_half.classList.add('invert')
+            // stock_img.classList.add('invert', 'icon-opacity')
+            break;
     }
+  }
+
+  function isDarkMode() {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {return "dark"} else {return "light"};
   }
   
   lightSwitch.addEventListener('click', () => toggleMode("light"));
   darkSwitch.addEventListener('click', () => toggleMode("dark"));
+  autoSwitch.addEventListener('click', () => toggleMode(isDarkMode()));
+
+  toggleMode(isDarkMode())
+
+// Todo list for dark mode toggle:
+// Change main icon
+// Keep window from flashing white when loaded
+// When auto is selected, make the auto button active
+// set auto as the default active in html
+// make dark mode look prettier
