@@ -43,16 +43,6 @@ footer {
     color:#2980ef;
 }
 
-.form-group .placeholder-text {
-    position: absolute;
-    top: 50%; 
-    left: 12%; 
-    opacity: 0.7;
-    font-size: 1em;
-    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out, border 0.2s ease-in-out;
-    color: black;
-}
-
 input {
     border: unset;
     background: unset;
@@ -79,10 +69,6 @@ label {
     transform: translate(12px, -37px);
 }
 
-
-/* experimental */
-
-
 /* outlones text field when focused */
 input:focus {
     outline: none;
@@ -99,5 +85,14 @@ input:not(:placeholder-shown) + label, input:focus + label {
 input:focus + label {
     color: #1a73e8; 
 }
+
+
+
+
+
+
+/* experimental */
+
+
 
 

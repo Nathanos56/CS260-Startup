@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 body {
   min-height: 100vh;
 }
@@ -81,4 +83,60 @@ footer {
 
 .icon-opacity {
   opacity: 0.5;
+}
+
+
+
+/* Name field */
+
+.custom-shadow {
+  box-shadow: 0.05rem 0.1rem .5rem rgba(0, 0, 0, 0.155);
+}
+
+#name-group {
+  text-align: left;
+}
+
+#name-field {
+  border: unset;
+  background: unset;
+  border-bottom: 2px solid #434a523d;
+  border-radius:0;
+  background: #fff;
+  border-radius: 5px;
+  width: 100%;
+
+  padding: 16px;
+  margin-top: 20px;
+}
+
+#name-label {
+  all: unset;
+  display: block;
+  position: relative;
+  padding: 0 5px;
+  width: 7.75em;
+  color: #5f6368;
+  background: #fff;
+  transition: all 150ms ease;
+  transform: translate(18px, -41px);
+
+  font-family: "Open Sans", Arial, sans-serif;
+}
+
+/* outlones text field when focused */
+#name-field:focus {
+  outline: none;
+  padding: 15px;
+  border: 2px solid #1a73e8;
+}
+/* moves label */
+#name-field:not(:placeholder-shown) + #name-label, #name-field:focus + #name-label {
+  transform: translate(8px, -68px);
+  font-size: 13px !important;
+  width: 7.75em;
+}
+/* colors the label */
+#name-field:focus + #name-label {
+  color: #1a73e8; 
 }
