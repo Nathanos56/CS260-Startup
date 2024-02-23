@@ -1,3 +1,5 @@
+// CONFETTI
+
 const submit_confetti_button = document.getElementById("submit-confetti");
 
 submit_confetti_button.addEventListener('click', () => {
@@ -96,7 +98,9 @@ function previewImage(event, previewId) {
     }
 }
 
-// dark mode toggle
+
+
+// DARK MODE
 
 const allHTML = document.getElementById('html');
 const nav = document.querySelector('.navbar');
@@ -107,6 +111,7 @@ const sun = document.getElementById('sun');
 const moon = document.getElementById('moon');
 const circle_half = document.getElementById('circle-half');
 // const stock_img = document.querySelectorAll('.stockImage');
+const drop_img_main = document.getElementById('dropdown-img-main');
 
 const lightSwitch = document.getElementById('lightSwitch');
 const darkSwitch = document.getElementById('darkSwitch');
@@ -130,7 +135,10 @@ function toggleMode(mode) {
             sun.classList.add('invert');
             moon.classList.remove('invert');
             circle_half.classList.remove('invert');
-            // stock_img.classList.remove('invert', 'icon-opacity')
+            // stock_img.classList.remove('invert', 'icon-opacity');
+
+            drop_img_main.src = 'bootstrap-icons/sun-fill.svg';
+            localStorage.setItem("lightSwitch", "light");
             break;
         case "dark":
             allHTML.dataset.bsTheme = mode;
@@ -146,25 +154,32 @@ function toggleMode(mode) {
             sun.classList.add('invert');
             moon.classList.add('invert');
             circle_half.classList.add('invert')
-            // stock_img.classList.add('invert', 'icon-opacity')
+            // stock_img.classList.add('invert', 'icon-opacity');
+
+            drop_img_main.src = 'bootstrap-icons/moon-stars-fill.svg';
+            localStorage.setItem("lightSwitch", "dark");
             break;
     }
-  }
+}
 
-  function isDarkMode() {
+function isDarkMode() {
     if (window.matchMedia("(prefers-color-scheme: dark)").matches) {return "dark"} else {return "light"};
-  }
+}
   
-  lightSwitch.addEventListener('click', () => toggleMode("light"));
-  darkSwitch.addEventListener('click', () => toggleMode("dark"));
-  autoSwitch.addEventListener('click', () => toggleMode(isDarkMode()));
+lightSwitch.addEventListener('click', () => toggleMode("light"));
+darkSwitch.addEventListener('click', () => toggleMode("dark"));
+autoSwitch.addEventListener('click', () => toggleMode(isDarkMode()));
 
-  toggleMode(isDarkMode())
+// checks darkmode settings when the page is opened
+if (localStorage.getItem("lightSwitch")) {
+    toggleMode(localStorage.getItem("lightSwitch"));
+} else {
+    toggleMode(isDarkMode());
+}
+    
 
 // Todo list for dark mode toggle:
-// Change main icon
 // Keep window from flashing white when loaded
 // When auto is selected, make the auto button active
-// Save settings in brower storage
 // set auto as the default active in html
 // make dark mode look prettier
