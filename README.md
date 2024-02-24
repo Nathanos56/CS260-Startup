@@ -17,9 +17,9 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - JavaScript - Processes login, images, and notifications.
 
 ## Design images.
-![MainPageMockUI](MainPageMockUI.png)
-![LoginMockUI](LoginMockUI.png)
-![AdminPageMockUI](AdminPageMockUI.png)
+![MainPageMockUI](/mockUI/MainPageMockUI.png)
+![LoginMockUI](/mockUI/LoginMockUI.png)
+![AdminPageMockUI](/mockUI/AdminPageMockUI.png)
 
 ## HTML Deliverable
 - Three HTML pages. Home/submit image, login, and the admin page
