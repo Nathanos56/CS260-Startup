@@ -56,7 +56,7 @@
                 <div class="centered-section mt-5">
                     <div class="card shadow p-5 mb-5 bg-white mx-auto" style="max-width: 70vw; border-radius: 1.3rem;">
                         <form>
-                            <div>
+                            <div id="welcome">
                                 <h1 style="text-align: center;">Welcome!</h1>
                                 <br>
                             </div>
@@ -65,23 +65,24 @@
                                 <label id="name-label" for="name-field" style="font-size: 16px;">Your name here</label>
                                 <br><br><br>
                             </div>
-                            <!-- selected image -->
+                            <div>
+                                
+                            </div>
                             <div class="mb-4 d-flex justify-content-center">
                                 <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
                                 alt="example placeholder" style="width: 300px;" />
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <div class="btn btn-primary btn-rounded">
+                                <div id="choose-img" class="btn btn-primary btn-rounded">
                                     <label class="form-label text-white m-1" for="customFile1">Choose image</label>
                                     <input type="file" class="form-control d-none" id="customFile1" onchange="previewImage(event, 'selectedImage')" />
                                 </div>
                                 &nbsp &nbsp 
                                 <button type="button" id="submit-confetti" class="btn btn-primary">Upload</button>
                             </div>
-                            <div>
-                                <br> <br>
-                                <h3>Your image was accepted, user!</h3>
+                            <div id="success-msg" class="d-none">
+                                <h3 >Your image was accepted, user!</h3>
                             </div>
                             
                         </form>
@@ -111,9 +112,9 @@
                     </ul>
                 </div>
             </div>
-           <!-- position-sticky does the same as sticky bottom -->
-           <!-- align-items-end float-right bottom-0 end-0 me-3    these should all align it on the right of the screen but it's not doing-->
-            <div class="dropdown dropdown-end bd-mode-toggle sticky-bottom align-items-end float-right bottom-0 end-0 mb-3 me-3 ms-auto">
+           <!-- position-sticky does the same as sticky-bottom -->
+           <!-- align-items-end float-right bottom-0 end-0 me-3 -->
+            <div class="dropdown bd-mode-toggle sticky-bottom mb-3 me-3 ms-auto">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img id="dropdown-img-main" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
                 </button>

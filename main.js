@@ -1,11 +1,21 @@
 // CONFETTI
 
 const submit_confetti_button = document.getElementById("submit-confetti");
+const success_msg = document.getElementById('success-msg');
+const choose_img = document.getElementById('choose-img');
+const name_group = document.getElementById('name-group');
+// const name_label = document.getElementById('name-label');
+const welcome = document.getElementById('welcome');
 
 submit_confetti_button.addEventListener('click', () => {
     getName();
     initialConfetti();
     randomConfetti();
+    success_msg.classList.remove('d-none');
+    submit_confetti_button.classList.add('d-none');
+    choose_img.classList.add('d-none');
+    name_group.classList.add('d-none');
+    welcome.classList.add('d-none');
 });
 
 function initialConfetti() {
@@ -72,9 +82,6 @@ function saveImage() {
 }
 
 
-function showImage() {
-
-}
 
 function previewImage(event, previewId) {
     const imagePreview = document.getElementById(previewId);
@@ -126,8 +133,8 @@ function dropIcons(mode) {
             lightSwitch.classList.remove('active');
             autoSwitch.classList.add('active');
 
-            sun.classList.remove('invert');
-            moon.classList.remove('invert');
+            sun.classList.add('invert');
+            moon.classList.add('invert');
             circle_half.classList.add('invert');
             drop_img_main.src = 'bootstrap-icons/circle-half.svg';
             localStorage.setItem("lightSwitch", "auto");

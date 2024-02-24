@@ -74,12 +74,6 @@ main {
   flex-direction: column;
 }
 
-/* .dropdown {
-  position: sticky !important;
-  bottom: 0; 
-  right: 0 !important;
-} */
-
 
 /* DarkMode */
 
@@ -101,7 +95,8 @@ main {
 
 
 
-/* Name field */
+
+/* NAME FIELD */
 
 .custom-shadow {
   box-shadow: 0.05rem 0.1rem .5rem rgba(0, 0, 0, 0.155);
