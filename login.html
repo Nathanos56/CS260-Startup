@@ -47,10 +47,11 @@
             </nav>
         </header>
 
-        <main>
+        <main class="flex-grow-1">
             <!-- <div>
                 <img class="recentImg mb-5" src="images/aiWin.jpg" alt="img1" width="150">
             </div> -->
+            
             <div class="container mt-5">
                 <div class="card shadow-lg p-4 mb-5 bg-white mx-auto" style="max-width: 300px; border-radius: 1rem;">
                     <form class="justify-content-center">
@@ -75,8 +76,34 @@
                     </form>
                 </div>
             </div>
+              
         </main>
         
+        <!-- LIGHT SWITCH -->
+        <!-- mt-auto -->
+        <div id="drop-container" class="sticky-bottom me-3 ms-auto" style="height: 53px">
+            <div class="dropdown bd-mode-toggle ">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img id="dropdown-img-main" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
+                </button>
+                <ul class="dropdown-menu shadow">
+                    <li><button id="lightSwitch" type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
+                        <img id="sun" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="invert icon-opacity">
+                        &nbsp Light <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                    </button></li>
+                    <li><button id="darkSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                        <img id="moon" src="bootstrap-icons/moon-stars-fill.svg" width="16" height="16" class="icon-opacity">
+                        &nbsp Dark <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                    </button></li>
+                    <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
+                        <img id="circle-half" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="icon-opacity" >
+                        &nbsp Auto <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                    </button></li>
+                </ul>
+            </div>
+        </div>  
+        
+
         <footer class="d-flex flex-wrap justify-content-between align-items-center shadow-lg text-secondary mt-auto border-top">
             <div class="ms-5">Author: Nathaniel Wilson</div>
             <a class="text-reset me-5" href="https://github.com/Nathanos56/CS260-Startup">GitHub</a>

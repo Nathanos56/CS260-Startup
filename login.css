@@ -11,15 +11,9 @@
 
 body {
     min-height: 100vh;
-}
-
-/* .container {
     display: flex;
-    width: 80vw;
-    justify-content: center;
-    justify-content: space-between;
-    justify-content: flex-start;
-} */
+    flex-direction: column;
+}
 
 footer {
     min-height: 50px;
@@ -92,10 +86,4 @@ input:focus + label {
 
 
 /* experimental */
-
-/* main {
-    display: flex;
-    flex-direction: row;
-} */
-
 
