@@ -51,72 +51,74 @@
         </header>
 
         <main>
-            <div class="empty-section"></div>
-            <div class="centered-section mt-5">
-                <div class="card shadow p-5 mb-5 bg-white mx-auto" style="max-width: 70vw; border-radius: 1.3rem;">
-                    <form>
-                        <div>
-                            <h1 style="text-align: center;">Welcome!</h1>
-                            <br>
-                        </div>
-                        <div id="name-group" class="form-group">
-                            <input class="custom-shadow" type="name" id="name-field" placeholder=" ">
-                            <label id="name-label" for="name-field" style="font-size: 16px;">Your name here</label>
-                            <br><br><br>
-                        </div>
-                        <!-- selected image -->
-                        <div class="mb-4 d-flex justify-content-center">
-                            <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
-                            alt="example placeholder" style="width: 300px;" />
-                        </div>
-                        <br>
-                        <div class="d-flex justify-content-center">
-                            <div class="btn btn-primary btn-rounded">
-                                <label class="form-label text-white m-1" for="customFile1">Choose image</label>
-                                <input type="file" class="form-control d-none" id="customFile1" onchange="previewImage(event, 'selectedImage')" />
+            <div id="content">
+                <div class="empty-section"></div>
+                <div class="centered-section mt-5">
+                    <div class="card shadow p-5 mb-5 bg-white mx-auto" style="max-width: 70vw; border-radius: 1.3rem;">
+                        <form>
+                            <div>
+                                <h1 style="text-align: center;">Welcome!</h1>
+                                <br>
                             </div>
-                            &nbsp &nbsp 
-                            <button type="button" id="submit-confetti" class="btn btn-primary">Upload</button>
-                        </div>
-                        <div>
-                            <br> <br>
-                            <h3>Your image was accepted, user!</h3>
-                        </div>
-                        
-                    </form>
-                </div>
-                
-                <br> <br> <br> <br>
-                <h2>About</h2>
-                <br>
-                <div class="about">
-                    On campus, students put sticky notes in their windows to write messages or draw pictures. My old monitor broke a little while ago so I removed the LCD layer and put it in my window. I am working on setting up a Raspberry Pi that will grab images from a Google Drive and display them on the LCD. I will get bored of picking images and I want some help. In this class, I will make a website where people can upload images. I can then approve or veto the images before they get sent to my Google Drive. From there, the Raspberry Pi can grab them.
+                            <div id="name-group" class="form-group">
+                                <input class="custom-shadow" type="name" id="name-field" placeholder=" ">
+                                <label id="name-label" for="name-field" style="font-size: 16px;">Your name here</label>
+                                <br><br><br>
+                            </div>
+                            <!-- selected image -->
+                            <div class="mb-4 d-flex justify-content-center">
+                                <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                                alt="example placeholder" style="width: 300px;" />
+                            </div>
+                            <br>
+                            <div class="d-flex justify-content-center">
+                                <div class="btn btn-primary btn-rounded">
+                                    <label class="form-label text-white m-1" for="customFile1">Choose image</label>
+                                    <input type="file" class="form-control d-none" id="customFile1" onchange="previewImage(event, 'selectedImage')" />
+                                </div>
+                                &nbsp &nbsp 
+                                <button type="button" id="submit-confetti" class="btn btn-primary">Upload</button>
+                            </div>
+                            <div>
+                                <br> <br>
+                                <h3>Your image was accepted, user!</h3>
+                            </div>
+                            
+                        </form>
+                    </div>
+                    
                     <br> <br> <br> <br>
+                    <h2>About</h2>
+                    <br>
+                    <div class="about">
+                        On campus, students put sticky notes in their windows to write messages or draw pictures. My old monitor broke a little while ago so I removed the LCD layer and put it in my window. I am working on setting up a Raspberry Pi that will grab images from a Google Drive and display them on the LCD. I will get bored of picking images and I want some help. In this class, I will make a website where people can upload images. I can then approve or veto the images before they get sent to my Google Drive. From there, the Raspberry Pi can grab them.
+                        <br> <br> <br> <br>
+                    </div>
+                </div>
+
+                <div class="right-section mt-5">
+                    <h3>Recent Images</h3>
+                    <ul style="list-style-type:none;"">
+                        <li>
+                            <img class="stockImage" src="/stockImage.png" alt="img1" width="150">
+                        </li>
+                        <li>
+                            <img class="stockImage" src="/stockImage.png" alt="img2" width="150">
+                        </li>
+                        <li>
+                            <img class="stockImage" src="/stockImage.png" alt="img3" width="150">
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-            <div class="right-section mt-5">
-                <h3>Recent Images</h3>
-                <ul style="list-style-type:none;"">
-                    <li>
-                        <img class="stockImage" src="/stockImage.png" alt="img1" width="150">
-                    </li>
-                    <li>
-                        <img class="stockImage" src="/stockImage.png" alt="img2" width="150">
-                    </li>
-                    <li>
-                        <img class="stockImage" src="/stockImage.png" alt="img3" width="150">
-                    </li>
-                </ul>
-            </div>
-
            <!-- position-sticky does the same as sticky bottom -->
-            <div class="dropdown bd-mode-toggle sticky-bottom mb-3 me-3 ms-auto">
+           <!-- align-items-end float-right bottom-0 end-0 me-3    these should all align it on the right of the screen but it's not doing-->
+            <div class="dropdown dropdown-end bd-mode-toggle sticky-bottom align-items-end float-right bottom-0 end-0 mb-3 me-3 ms-auto">
                 <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img id="dropdown-img-main" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="ms-0 invert">
+                    <img id="dropdown-img-main" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
                 </button>
                 <ul class="dropdown-menu shadow">
-                    <li><button id="lightSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light">
+                    <li><button id="lightSwitch" type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
                         <img id="sun" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="invert icon-opacity">
                         &nbsp Light <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
                     </button></li>
@@ -124,7 +126,7 @@
                         <img id="moon" src="bootstrap-icons/moon-stars-fill.svg" width="16" height="16" class="icon-opacity">
                         &nbsp Dark <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
                     </button></li>
-                    <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto">
+                    <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
                         <img id="circle-half" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="icon-opacity" >
                         &nbsp Auto <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
                     </button></li>
