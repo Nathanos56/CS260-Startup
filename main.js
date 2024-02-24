@@ -4,10 +4,11 @@ const submit_confetti_button = document.getElementById("submit-confetti");
 const success_msg = document.getElementById('success-msg');
 const choose_img = document.getElementById('choose-img');
 const name_group = document.getElementById('name-group');
-// const name_label = document.getElementById('name-label');
+const hey_user = document.getElementById('hey-user');
 const welcome = document.getElementById('welcome');
 
 submit_confetti_button.addEventListener('click', () => {
+    const userH1 = hey_user.querySelector('h1');
     getName();
     initialConfetti();
     randomConfetti();
@@ -16,6 +17,8 @@ submit_confetti_button.addEventListener('click', () => {
     choose_img.classList.add('d-none');
     name_group.classList.add('d-none');
     welcome.classList.add('d-none');
+    hey_user.classList.remove('d-none')
+    userH1.textContent = userH1.textContent.replace('user', localStorage.getItem('userName'));
 });
 
 function initialConfetti() {

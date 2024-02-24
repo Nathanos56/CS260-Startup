@@ -61,12 +61,13 @@
                                 <br>
                             </div>
                             <div id="name-group" class="form-group">
-                                <input class="custom-shadow" type="name" id="name-field" placeholder=" ">
+                                <input class="custom-shadow" type="name" id="name-field" placeholder=" " required>
                                 <label id="name-label" for="name-field" style="font-size: 16px;">Your name here</label>
                                 <br><br><br>
                             </div>
-                            <div>
-                                
+                            <div id="hey-user" class="d-none">
+                                <h1 style="text-align: center;">Hey user!</h1>
+                                <br><br>
                             </div>
                             <div class="mb-4 d-flex justify-content-center">
                                 <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
@@ -76,13 +77,13 @@
                             <div class="d-flex justify-content-center">
                                 <div id="choose-img" class="btn btn-primary btn-rounded">
                                     <label class="form-label text-white m-1" for="customFile1">Choose image</label>
-                                    <input type="file" class="form-control d-none" id="customFile1" onchange="previewImage(event, 'selectedImage')" />
+                                    <input type="file" class="form-control d-none" id="customFile1" onchange="previewImage(event, 'selectedImage')" required/>
                                 </div>
                                 &nbsp &nbsp 
-                                <button type="button" id="submit-confetti" class="btn btn-primary">Upload</button>
+                                <button type="submit" id="submit-confetti" class="btn btn-primary">Upload</button>
                             </div>
                             <div id="success-msg" class="d-none">
-                                <h3 >Your image was accepted, user!</h3>
+                                <h3 >Your image was accepted</h3>
                             </div>
                             
                         </form>
