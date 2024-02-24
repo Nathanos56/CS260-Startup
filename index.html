@@ -94,7 +94,7 @@
                     <br>
                     <div class="about">
                         On campus, students put sticky notes in their windows to write messages or draw pictures. My old monitor broke a little while ago so I removed the LCD layer and put it in my window. I am working on setting up a Raspberry Pi that will grab images from a Google Drive and display them on the LCD. I will get bored of picking images and I want some help. In this class, I will make a website where people can upload images. I can then approve or veto the images before they get sent to my Google Drive. From there, the Raspberry Pi can grab them.
-                        <br> <br> <br> <br>
+                        <br> <br>
                     </div>
                 </div>
 
@@ -113,31 +113,32 @@
                     </ul>
                 </div>
             </div>
+
            <!-- position-sticky does the same as sticky-bottom -->
            <!-- align-items-end float-right bottom-0 end-0 me-3 -->
-            <div class="dropdown bd-mode-toggle sticky-bottom mb-3 me-3 ms-auto">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img id="dropdown-img-main" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
-                </button>
-                <ul class="dropdown-menu shadow">
-                    <li><button id="lightSwitch" type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
-                        <img id="sun" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="invert icon-opacity">
-                        &nbsp Light <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
-                    </button></li>
-                    <li><button id="darkSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                        <img id="moon" src="bootstrap-icons/moon-stars-fill.svg" width="16" height="16" class="icon-opacity">
-                        &nbsp Dark <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
-                    </button></li>
-                    <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
-                        <img id="circle-half" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="icon-opacity" >
-                        &nbsp Auto <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
-                    </button></li>
-                </ul>
-            </div>
-            
+           <div class="sticky-bottom me-3 ms-auto" style="height: 53px">
+                <div class="dropdown bd-mode-toggle ">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img id="dropdown-img-main" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="ms-0 invert">
+                    </button>
+                    <ul class="dropdown-menu shadow">
+                        <li><button id="lightSwitch" type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
+                            <img id="sun" src="bootstrap-icons/sun-fill.svg" width="16" height="16" class="invert icon-opacity">
+                            &nbsp Light <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                        </button></li>
+                        <li><button id="darkSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
+                            <img id="moon" src="bootstrap-icons/moon-stars-fill.svg" width="16" height="16" class="icon-opacity">
+                            &nbsp Dark <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                        </button></li>
+                        <li><button id="autoSwitch" type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
+                            <img id="circle-half" src="bootstrap-icons/circle-half.svg" width="16" height="16" class="icon-opacity" >
+                            &nbsp Auto <img src="bootstrap-icons/check2.svg" width="16" height="16" class="checkmark ms-auto invert">
+                        </button></li>
+                    </ul>
+                </div>
+            </div>    
             
         </main>
-
         <footer class="d-flex flex-wrap justify-content-between align-items-center shadow-lg text-secondary mt-auto border-top">
             <div class="ms-5">Author: Nathaniel Wilson</div>
             <a class="text-reset me-5" href="https://github.com/Nathanos56/CS260-Startup">GitHub</a>
