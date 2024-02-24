@@ -16,7 +16,7 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - CSS - The styling for the webpages. Works on PC and mobile. 
 - JavaScript - Processes login, images, and notifications.
 
-## Design images.
+## Design images
 ![MainPageMockUI](/mockUI/MainPageMockUI.png)
 ![LoginMockUI](/mockUI/LoginMockUI.png)
 ![AdminPageMockUI](/mockUI/AdminPageMockUI.png)
