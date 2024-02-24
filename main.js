@@ -8,6 +8,17 @@ const hey_user = document.getElementById('hey-user');
 const welcome = document.getElementById('welcome');
 
 submit_confetti_button.addEventListener('click', () => {
+    // get the inputs from form
+    const inputs = document.getElementById("form").getElementsByTagName("input");
+
+    // check if inputs are empty
+    for (let i = 0; i < inputs.length; i++) {
+      if (inputs[i].value === "") {
+        alert("Please fill out all required fields!");
+        return false; // Prevent form submission
+      }
+    }
+
     const userH1 = hey_user.querySelector('h1');
     getName();
     initialConfetti();
