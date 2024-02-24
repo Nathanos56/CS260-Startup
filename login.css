@@ -93,6 +93,9 @@ input:focus + label {
 
 /* experimental */
 
-
+/* main {
+    display: flex;
+    flex-direction: row;
+} */
 
 

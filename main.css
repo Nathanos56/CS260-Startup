@@ -74,6 +74,15 @@ main {
   flex-direction: column;
 }
 
+.recentImg {
+  border-radius: 1.3rem;
+}
+
+#selectedImage {
+  border-radius: .8rem;
+}
+
+
 
 /* DarkMode */
 
