@@ -87,3 +87,21 @@ input:focus + label {
 
 /* experimental */
 
+
+/* DarkMode */
+
+.checkmark {
+    display: none;
+}
+  
+.active .checkmark {
+    display: inline;
+}
+  
+.invert {
+    filter: invert(1);
+}
+  
+.icon-opacity {
+    opacity: 0.5;
+}
