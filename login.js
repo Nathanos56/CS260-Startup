@@ -149,10 +149,63 @@ login_button.addEventListener('click', () => {
     if (isError) {return false}
     
 
-    const adminName = document.querySelector("#username-field");
-    localStorage.setItem("adminName", adminName.value);
-    const userDetails = { name: adminName, password: (document.querySelector("password-field").value )};
+    const adminName = (document.querySelector("#username-field")).value;
+    const adminPass = (document.querySelector("#password-field")).value;
+    localStorage.setItem("adminName", adminName);
+    const userDetails = { name: adminName, password: adminPass};
 
     username_field.classList.remove('error');
     pass_field.classList.remove('error');
 });
+
+
+
+// HIDE/VIEW PASSWORD
+
+// passwordToggle.addEventListener("click", togglePassword);
+
+// function togglePassword() {
+//    if (passwordInput.type === "password") {
+//       passwordInput.type = "text";
+//    } else {
+//       passwordInput.type = "password";
+//    }
+// }
+
+const emptyNameField = document.getElementById('missing-name');
+const emptyPassField = document.getElementById('missing-pass');
+
+const adminName = document.getElementById("username-field");
+const adminPass = document.getElementById("password-field");
+
+// remove empty error when user enters data
+adminName.addEventListener('input',  () => {
+    console.log("i made it in");
+    
+    if (adminName.value !== "") {
+        emptyNameField.classList.remove("show");
+    }
+});
+
+adminPass.addEventListener('input', () => {
+    if (adminPass.value !== "") {
+        emptyPassField.classList.remove("show");
+    }
+});
+
+// check if it's still empty when they click off the field
+adminName.addEventListener("blur", () => {
+    if (adminName.value === "") {
+        emptyNameField.classList.add("show");
+    } else {
+        emptyNameField.classList.remove("show");
+   }
+});
+
+adminPass.addEventListener("blur", () => {
+    if (adminPass.value === "") {
+        emptyPassField.classList.add("show");
+    } else {
+        emptyPassField.classList.remove("show");
+    }
+ });

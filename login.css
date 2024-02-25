@@ -127,3 +127,20 @@ input:focus.error {
 .no-copy {
     user-select: none;
 }
+
+
+#missing-pass, #missing-name {
+    font-size: 14px;
+    color: #e94e4e;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    transition: 150ms;
+}
+
+#missing-pass.show, #missing-name.show {
+    max-height: 32px;
+    opacity: 100%;
+    padding: 8px 0 0 0;
+    transition: 150ms;
+}
