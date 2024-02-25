@@ -138,26 +138,24 @@ const emptyPassField = document.getElementById('missing-pass');
 const adminName = document.getElementById("username-field");
 const adminPass = document.getElementById("password-field");
 
+// SHAKE
+emptyNameField.addEventListener("animationend", function() {
+    emptyNameField.classList.toggle('shake');
+});
+emptyPassField.addEventListener("animationend", function() {
+    emptyPassField.classList.toggle('shake');
+});
+
+
 login_button.addEventListener('click', () => {
     let isError = false;
 
-    emptyNameField.classList.remove('shake');
-    emptyPassField.classList.remove('shake');
-
-    if (username_field.classList.contains('error') && emptyNameField.classList.contains('show') && !emptyNameField.classList.contains('shake')) {
-        emptyNameField.classList.add('shake');
+    if (username_field.classList.contains('error') && emptyNameField.classList.contains('show')) {
+        emptyNameField.classList.toggle('shake');
     };
-    if (pass_field.classList.contains('error') && emptyPassField.classList.contains('show') && !emptyPassField.classList.contains('shake')) {
-        emptyPassField.classList.add('shake');
+    if (pass_field.classList.contains('error') && emptyPassField.classList.contains('show')) {
+        emptyPassField.classList.toggle('shake');
     };
-
-    // only shake if the error is already shown
-    // if (emptyNameField.classList.contains('show') || emptyPassField.classList.contains('show')) {
-    //     emptyNameField.classList.remove('shake');
-    //     emptyPassField.classList.remove('shake');
-    //     emptyNameField.classList.add('shake');
-    //     emptyPassField.classList.add('shake');
-    // };
 
     if (username_field.value === "") {
         username_field.classList.add('error');
@@ -165,7 +163,7 @@ login_button.addEventListener('click', () => {
         isError = true;
     } else {
         emptyNameField.classList.remove('error');
-        emptyNameField.classList.remove('shake');
+        // emptyNameField.classList.remove('shake');
         emptyNameField.classList.remove('show');
     };
 
@@ -175,14 +173,11 @@ login_button.addEventListener('click', () => {
         isError = true;
     } else {
         emptyPassField.classList.remove('error');
-        emptyPassField.classList.remove('shake');
+        // emptyPassField.classList.remove('shake');
         emptyPassField.classList.remove('show');
     };
 
     if (isError) {return false}
-    
-    // emptyPassField.classList.remove('shake');
-    // emptyNameField.classList.remove('shake');
 
     const adminName = (document.querySelector("#username-field")).value;
     const adminPass = (document.querySelector("#password-field")).value;
@@ -219,8 +214,8 @@ adminName.addEventListener("blur", () => {
     } else {
         emptyNameField.classList.remove("show");
         username_field.classList.remove('error');
-        emptyPassField.classList.remove('shake');
-        emptyNameField.classList.remove('shake');
+        // emptyPassField.classList.remove('shake');
+        // emptyNameField.classList.remove('shake');
    }
 });
 
@@ -230,10 +225,11 @@ adminPass.addEventListener("blur", () => {
     } else {
         emptyPassField.classList.remove("show");
         pass_field.classList.remove('error'); 
-        emptyPassField.classList.remove('shake');
-        emptyNameField.classList.remove('shake');
+        // emptyPassField.classList.remove('shake');
+        // emptyNameField.classList.remove('shake');
     }
 });
+
 
 
 // HIDE/VIEW PASSWORD
@@ -249,10 +245,3 @@ adminPass.addEventListener("blur", () => {
 // }
 
 
-// SHAKE
-username_field.addEventListener("animationend", function() {
-    emptyNameField.classList.remove('shake');
-});
-pass_field.addEventListener("animationend", function() {
-    emptyPassField.classList.remove('shake');
-});
