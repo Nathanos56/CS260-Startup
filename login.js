@@ -121,3 +121,38 @@ else {
     toggleMode('light');
     dropIcons('light');
 };
+
+
+
+
+// SIGN IN & ERROR
+
+const login_button = document.getElementById('login-button');
+const submit_confetti_button = document.getElementById("submit-confetti");
+const username_field = document.getElementById('username-field');
+const pass_field = document.getElementById('password-field');
+
+login_button.addEventListener('click', () => {
+    // get the inputs from form
+    const inputs = document.getElementById("form").getElementsByTagName("input");
+    // check if inputs are empty
+    let isError = false;
+    for (let i = 0; i < inputs.length; ++i) {
+        if (inputs[i].value === "") {
+            inputs[i].classList.add('error');
+            isError = true;
+        } else {
+            // in case say both had errors and they fixed one but not the other
+            inputs[i].classList.remove('error');
+        }
+    };
+    if (isError) {return false}
+    
+
+    const adminName = document.querySelector("#username-field");
+    localStorage.setItem("adminName", adminName.value);
+    const userDetails = { name: adminName, password: (document.querySelector("password-field").value )};
+
+    username_field.classList.remove('error');
+    pass_field.classList.remove('error');
+});

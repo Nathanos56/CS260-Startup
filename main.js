@@ -12,7 +12,7 @@ submit_confetti_button.addEventListener('click', () => {
     const inputs = document.getElementById("form").getElementsByTagName("input");
 
     // check if inputs are empty
-    for (let i = 0; i < inputs.length; i++) {
+    for (let i = 0; i < inputs.length; ++i) {
       if (inputs[i].value === "") {
         alert("Please fill out all required fields!");
         return false; // Prevent form submission
@@ -20,7 +20,7 @@ submit_confetti_button.addEventListener('click', () => {
     }
 
     const userH1 = hey_user.querySelector('h1');
-    getName();
+    localStorage.setItem("userName", (document.querySelector("#name-field")).value);
     initialConfetti();
     randomConfetti();
     success_msg.classList.remove('d-none');
@@ -28,7 +28,7 @@ submit_confetti_button.addEventListener('click', () => {
     choose_img.classList.add('d-none');
     name_group.classList.add('d-none');
     welcome.classList.add('d-none');
-    hey_user.classList.remove('d-none')
+    hey_user.classList.remove('d-none');
     userH1.textContent = userH1.textContent.replace('user', localStorage.getItem('userName'));
 });
 
@@ -83,12 +83,6 @@ function randomConfetti() {
 
 
 
-
-function getName() {
-    const nameEl = document.querySelector("#name-field");
-    localStorage.setItem("userName", nameEl.value);
-    // window.location.href = "play.html";
-}
 
 
 function saveImage() {

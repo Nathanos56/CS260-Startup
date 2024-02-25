@@ -37,13 +37,17 @@ footer {
     color:#2980ef;
 }
 
+
+/* LOGIN FIELDS */
+
 input {
     border: unset;
     background: unset;
     border-bottom: 2px solid #434a522c;
-    border-radius:0;
+    /* border-bottom: 2px solid #1a73e838; */
     background: #fff;
-    border-radius: 5px;
+    border-radius: 8px;
+    /* border-radius: 2rem; */
     width: 100%;
 
     padding: 16px;
@@ -60,11 +64,11 @@ label {
     color: #5f6368;
     background: #fff;
     transition: all 150ms ease;
-    transform: translate(12px, -37px);
+    transform: translate(12px, -41px);
 }
 
-/* outlones text field when focused */
-input:focus {
+/* outlones text field blue when focused w/ no error */
+input:focus:not(.error) {
     outline: none;
     padding: 15px;
     border: 2px solid #1a73e8;
@@ -75,17 +79,11 @@ input:not(:placeholder-shown) + label, input:focus + label {
     font-size: 13px;
     width: auto;
 }
-/* colors the label */
-input:focus + label {
+/* colors the label blue when no error */
+input:focus:not(.error) + label {
     color: #1a73e8; 
 }
 
-
-
-
-
-
-/* experimental */
 
 
 /* DarkMode */
@@ -105,3 +103,24 @@ input:focus + label {
 .icon-opacity {
     opacity: 0.5;
 }
+
+
+
+
+/* experimental */
+
+
+input.error {
+    background: rgba(#ee0404, 0.96);
+    border-bottom: 2px solid #ee040450;
+} 
+input.error + label {
+    background: rgba(#ee0404, 0.96);
+    color: #ee0404;
+}
+input:focus.error {
+    outline: none;
+    padding: 15px;
+    border: 2px solid #ee0404;
+}
+
