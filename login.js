@@ -144,27 +144,65 @@ login_button.addEventListener('click', () => {
     const inputs = document.getElementById("form").getElementsByTagName("input");
     // check if inputs are empty
     let isError = false;
-    for (let i = 0; i < inputs.length; ++i) {
-        if (inputs[i].value === "") {
-            inputs[i].classList.add('error');
-            isError = true;
-            if (inputs[i] === username_field) {
-                emptyNameField.classList.add('show');
-            } else if (inputs[i] === pass_field) {
-                emptyPassField.classList.add('show');
-            };
-        } else {
-            // in case say both had errors and they fixed one but not the other
-            inputs[i].classList.remove('error');
-            if (inputs[i] === username_field) {
-                emptyNameField.classList.remove('show');
-            } else if (inputs[i] === pass_field) {
-                emptyPassField.classList.remove('show');
-            };
-        };
-    };
+
+    if (emptyNameField.classList.contains('show') || emptyPassField.classList.contains('show')) {
+        emptyNameField.classList.add('shake');
+        emptyPassField.classList.add('shake');
+    }
+    if (username_field.value === "") {
+        username_field.classList.add('error');
+        isError = true;
+        // if (emptyNameField.classList.contains('show')) {
+        //     emptyNameField.classList.add('shake');
+        // }
+        emptyNameField.classList.add('show');
+    } else {
+        emptyNameField.classList.remove('error');
+        emptyNameField.classList.remove('shake');
+        emptyNameField.classList.remove('show');
+    }
+    if (pass_field.value === "") {
+        pass_field.classList.add('error');
+        isError = true;
+        // if (emptyPassField.classList.contains('show')) {
+        //     emptyPassField.classList.add('shake');
+        // } 
+        emptyPassField.classList.add('show');
+    } else {
+        emptyPassField.classList.remove('error');
+        emptyPassField.classList.remove('shake');
+        emptyPassField.classList.remove('show');
+    }
+
+    // for (let i = 0; i < inputs.length; ++i) {
+    //     if (inputs[i].value === "") {
+    //         inputs[i].classList.add('error');
+    //         isError = true;
+    //         if (inputs[i] === username_field) {
+    //             if (emptyNameField.classList.contains('show')) {
+    //                 emptyNameField.classList.add('shake');
+    //             } 
+    //             emptyNameField.classList.add('show');
+    //         } else if (inputs[i] === pass_field) {
+    //             if (emptyPassField.classList.contains('show')) {
+    //                 emptyPassField.classList.add('shake');
+    //             } 
+    //             emptyPassField.classList.add('show');
+    //         };
+    //     } else {
+    //         // in case say both had errors and they fixed one but not the other
+    //         inputs[i].classList.remove('error');
+    //         if (inputs[i] === username_field) {
+    //             emptyNameField.classList.remove('show');
+    //         } else if (inputs[i] === pass_field) {
+    //             emptyPassField.classList.remove('show');
+    //         };
+    //     };
+    // };
     if (isError) {return false}
     
+    emptyPassField.classList.remove('shake');
+    emptyNameField.classList.remove('shake');
 
     const adminName = (document.querySelector("#username-field")).value;
     const adminPass = (document.querySelector("#password-field")).value;
@@ -222,3 +260,14 @@ adminPass.addEventListener("blur", () => {
 //       passwordInput.type = "password";
 //    }
 // }
+
+
+// SHAKE
+username_field.addEventListener("animationend", function() {
+    // element.classList.remove('shake');
+    emptyNameField.classList.remove('shake');
+});
+pass_field.addEventListener("animationend", function() {
+    // element.classList.remove('shake');
+    emptyPassField.classList.remove('shake');
+});
