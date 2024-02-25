@@ -124,3 +124,6 @@ input:focus.error {
     border: 2px solid #ee0404;
 }
 
+.no-copy {
+    user-select: none;
+}

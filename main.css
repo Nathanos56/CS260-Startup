@@ -135,6 +135,7 @@ main {
   transform: translate(18px, -41px);
 
   font-family: "Open Sans", Arial, sans-serif;
+  user-select: none;
 }
 
 /* outlones text field when focused */
@@ -155,5 +156,4 @@ main {
 #name-field:focus + #name-label {
   color: #1a73e8; 
 }
-
 
