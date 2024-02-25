@@ -150,20 +150,18 @@ emptyPassField.addEventListener("animationend", function() {
 login_button.addEventListener('click', () => {
     let isError = false;
 
-    if (username_field.classList.contains('error') && emptyNameField.classList.contains('show')) {
+    // shakes empty error when it's visible
+    if (emptyNameField.classList.contains('show') || emptyPassField.classList.contains('show')) {
         emptyNameField.classList.toggle('shake');
-    };
-    if (pass_field.classList.contains('error') && emptyPassField.classList.contains('show')) {
         emptyPassField.classList.toggle('shake');
     };
-
+     
     if (username_field.value === "") {
         username_field.classList.add('error');
         emptyNameField.classList.add('show');
         isError = true;
     } else {
         emptyNameField.classList.remove('error');
-        // emptyNameField.classList.remove('shake');
         emptyNameField.classList.remove('show');
     };
 
@@ -173,7 +171,6 @@ login_button.addEventListener('click', () => {
         isError = true;
     } else {
         emptyPassField.classList.remove('error');
-        // emptyPassField.classList.remove('shake');
         emptyPassField.classList.remove('show');
     };
 
@@ -214,8 +211,6 @@ adminName.addEventListener("blur", () => {
     } else {
         emptyNameField.classList.remove("show");
         username_field.classList.remove('error');
-        // emptyPassField.classList.remove('shake');
-        // emptyNameField.classList.remove('shake');
    }
 });
 
@@ -225,8 +220,6 @@ adminPass.addEventListener("blur", () => {
     } else {
         emptyPassField.classList.remove("show");
         pass_field.classList.remove('error'); 
-        // emptyPassField.classList.remove('shake');
-        // emptyNameField.classList.remove('shake');
     }
 });
 
