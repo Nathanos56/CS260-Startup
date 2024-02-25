@@ -138,71 +138,51 @@ const emptyPassField = document.getElementById('missing-pass');
 const adminName = document.getElementById("username-field");
 const adminPass = document.getElementById("password-field");
 
-// I need to clean up this function
 login_button.addEventListener('click', () => {
-    // get the inputs from form
-    const inputs = document.getElementById("form").getElementsByTagName("input");
-    // check if inputs are empty
     let isError = false;
 
-    if (emptyNameField.classList.contains('show') || emptyPassField.classList.contains('show')) {
+    emptyNameField.classList.remove('shake');
+    emptyPassField.classList.remove('shake');
+
+    if (username_field.classList.contains('error') && emptyNameField.classList.contains('show') && !emptyNameField.classList.contains('shake')) {
         emptyNameField.classList.add('shake');
+    };
+    if (pass_field.classList.contains('error') && emptyPassField.classList.contains('show') && !emptyPassField.classList.contains('shake')) {
         emptyPassField.classList.add('shake');
-    }
+    };
+
+    // only shake if the error is already shown
+    // if (emptyNameField.classList.contains('show') || emptyPassField.classList.contains('show')) {
+    //     emptyNameField.classList.remove('shake');
+    //     emptyPassField.classList.remove('shake');
+    //     emptyNameField.classList.add('shake');
+    //     emptyPassField.classList.add('shake');
+    // };
+
     if (username_field.value === "") {
         username_field.classList.add('error');
-        isError = true;
-        // if (emptyNameField.classList.contains('show')) {
-        //     emptyNameField.classList.add('shake');
-        // }
         emptyNameField.classList.add('show');
+        isError = true;
     } else {
         emptyNameField.classList.remove('error');
         emptyNameField.classList.remove('shake');
         emptyNameField.classList.remove('show');
-    }
+    };
+
     if (pass_field.value === "") {
         pass_field.classList.add('error');
-        isError = true;
-        // if (emptyPassField.classList.contains('show')) {
-        //     emptyPassField.classList.add('shake');
-        // } 
         emptyPassField.classList.add('show');
+        isError = true;
     } else {
         emptyPassField.classList.remove('error');
         emptyPassField.classList.remove('shake');
         emptyPassField.classList.remove('show');
-    }
+    };
 
-    // for (let i = 0; i < inputs.length; ++i) {
-    //     if (inputs[i].value === "") {
-    //         inputs[i].classList.add('error');
-    //         isError = true;
-    //         if (inputs[i] === username_field) {
-    //             if (emptyNameField.classList.contains('show')) {
-    //                 emptyNameField.classList.add('shake');
-    //             } 
-    //             emptyNameField.classList.add('show');
-    //         } else if (inputs[i] === pass_field) {
-    //             if (emptyPassField.classList.contains('show')) {
-    //                 emptyPassField.classList.add('shake');
-    //             } 
-    //             emptyPassField.classList.add('show');
-    //         };
-    //     } else {
-    //         // in case say both had errors and they fixed one but not the other
-    //         inputs[i].classList.remove('error');
-    //         if (inputs[i] === username_field) {
-    //             emptyNameField.classList.remove('show');
-    //         } else if (inputs[i] === pass_field) {
-    //             emptyPassField.classList.remove('show');
-    //         };
-    //     };
-    // };
     if (isError) {return false}
     
-    emptyPassField.classList.remove('shake');
-    emptyNameField.classList.remove('shake');
+    // emptyPassField.classList.remove('shake');
+    // emptyNameField.classList.remove('shake');
 
     const adminName = (document.querySelector("#username-field")).value;
     const adminPass = (document.querySelector("#password-field")).value;
@@ -211,6 +191,9 @@ login_button.addEventListener('click', () => {
 
     username_field.classList.remove('error');
     pass_field.classList.remove('error');
+
+    // the console complains if it returns true
+    return false;
 });
 
 
@@ -236,6 +219,8 @@ adminName.addEventListener("blur", () => {
     } else {
         emptyNameField.classList.remove("show");
         username_field.classList.remove('error');
+        emptyPassField.classList.remove('shake');
+        emptyNameField.classList.remove('shake');
    }
 });
 
@@ -245,11 +230,13 @@ adminPass.addEventListener("blur", () => {
     } else {
         emptyPassField.classList.remove("show");
         pass_field.classList.remove('error'); 
+        emptyPassField.classList.remove('shake');
+        emptyNameField.classList.remove('shake');
     }
 });
 
 
- // HIDE/VIEW PASSWORD
+// HIDE/VIEW PASSWORD
 
 // passwordToggle.addEventListener("click", togglePassword);
 
@@ -264,10 +251,8 @@ adminPass.addEventListener("blur", () => {
 
 // SHAKE
 username_field.addEventListener("animationend", function() {
-    // element.classList.remove('shake');
     emptyNameField.classList.remove('shake');
 });
 pass_field.addEventListener("animationend", function() {
-    // element.classList.remove('shake');
     emptyPassField.classList.remove('shake');
 });
