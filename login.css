@@ -85,6 +85,44 @@ input:focus:not(.error) + label {
 }
 
 
+/* LOGIN ERRORS */
+
+input.error {
+    background: rgba(#ee0404, 0.96);
+    border-bottom: 2px solid #ee040450;
+} 
+input.error + label {
+    background: rgba(#ee0404, 0.96);
+    color: #ee0404;
+}
+input:focus.error {
+    outline: none;
+    padding: 15px;
+    border: 2px solid #ee0404;
+}
+
+.no-copy {
+    user-select: none;
+}
+
+#missing-pass, #missing-name {
+    font-size: 14px;
+    color: #ee0404;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    transition: 150ms;
+}
+
+#missing-pass.show, #missing-name.show {
+    max-height: 32px;
+    opacity: 100%;
+    padding: 8px 0 0 0;
+    transition: 150ms;
+}
+
+
+
 
 /* DarkMode */
 
@@ -110,37 +148,3 @@ input:focus:not(.error) + label {
 /* experimental */
 
 
-input.error {
-    background: rgba(#ee0404, 0.96);
-    border-bottom: 2px solid #ee040450;
-} 
-input.error + label {
-    background: rgba(#ee0404, 0.96);
-    color: #ee0404;
-}
-input:focus.error {
-    outline: none;
-    padding: 15px;
-    border: 2px solid #ee0404;
-}
-
-.no-copy {
-    user-select: none;
-}
-
-
-#missing-pass, #missing-name {
-    font-size: 14px;
-    color: #e94e4e;
-    max-height: 0;
-    opacity: 0;
-    padding: 0;
-    transition: 150ms;
-}
-
-#missing-pass.show, #missing-name.show {
-    max-height: 32px;
-    opacity: 100%;
-    padding: 8px 0 0 0;
-    transition: 150ms;
-}

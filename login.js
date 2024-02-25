@@ -127,11 +127,18 @@ else {
 
 // SIGN IN & ERROR
 
+// for the red error
 const login_button = document.getElementById('login-button');
-const submit_confetti_button = document.getElementById("submit-confetti");
 const username_field = document.getElementById('username-field');
 const pass_field = document.getElementById('password-field');
 
+// for the show errors
+const emptyNameField = document.getElementById('missing-name');
+const emptyPassField = document.getElementById('missing-pass');
+const adminName = document.getElementById("username-field");
+const adminPass = document.getElementById("password-field");
+
+// I need to clean up this function
 login_button.addEventListener('click', () => {
     // get the inputs from form
     const inputs = document.getElementById("form").getElementsByTagName("input");
@@ -141,10 +148,20 @@ login_button.addEventListener('click', () => {
         if (inputs[i].value === "") {
             inputs[i].classList.add('error');
             isError = true;
+            if (inputs[i] === username_field) {
+                emptyNameField.classList.add('show');
+            } else if (inputs[i] === pass_field) {
+                emptyPassField.classList.add('show');
+            };
         } else {
             // in case say both had errors and they fixed one but not the other
             inputs[i].classList.remove('error');
-        }
+            if (inputs[i] === username_field) {
+                emptyNameField.classList.remove('show');
+            } else if (inputs[i] === pass_field) {
+                emptyPassField.classList.remove('show');
+            };
+        };
     };
     if (isError) {return false}
     
@@ -158,25 +175,6 @@ login_button.addEventListener('click', () => {
     pass_field.classList.remove('error');
 });
 
-
-
-// HIDE/VIEW PASSWORD
-
-// passwordToggle.addEventListener("click", togglePassword);
-
-// function togglePassword() {
-//    if (passwordInput.type === "password") {
-//       passwordInput.type = "text";
-//    } else {
-//       passwordInput.type = "password";
-//    }
-// }
-
-const emptyNameField = document.getElementById('missing-name');
-const emptyPassField = document.getElementById('missing-pass');
-
-const adminName = document.getElementById("username-field");
-const adminPass = document.getElementById("password-field");
 
 // remove empty error when user enters data
 adminName.addEventListener('input',  () => {
@@ -199,6 +197,7 @@ adminName.addEventListener("blur", () => {
         emptyNameField.classList.add("show");
     } else {
         emptyNameField.classList.remove("show");
+        username_field.classList.remove('error');
    }
 });
 
@@ -207,5 +206,19 @@ adminPass.addEventListener("blur", () => {
         emptyPassField.classList.add("show");
     } else {
         emptyPassField.classList.remove("show");
+        pass_field.classList.remove('error'); 
     }
- });
+});
+
+
+ // HIDE/VIEW PASSWORD
+
+// passwordToggle.addEventListener("click", togglePassword);
+
+// function togglePassword() {
+//    if (passwordInput.type === "password") {
+//       passwordInput.type = "text";
+//    } else {
+//       passwordInput.type = "password";
+//    }
+// }
