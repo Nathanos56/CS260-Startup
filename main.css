@@ -144,8 +144,7 @@ main {
   padding: 15px;
   border: 2px solid #1a73e8;
 }
-/* moves label */
-/* when the placeholder is not shown (the user has typed something) or when the field is focused */
+/* moves label when the placeholder is not shown (the user has typed something) or when the field is focused */
 #name-field:not(:placeholder-shown) + #name-label, #name-field:focus + #name-label {
   transform: translate(8px, -68px);
   font-size: 13px !important;
@@ -157,3 +156,66 @@ main {
   color: #1a73e8; 
 }
 
+
+
+
+/* LOGIN ERRORS */
+
+input.error {
+/* #name-field.error { */
+  background: rgba(#ee0404, 0.96);
+  border-bottom: 2px solid #ee040450;
+} 
+input.error + label {
+/* #name-field.error + label { */
+  background: rgba(#ee0404, 0.96);
+  color: #ee0404 !important;
+}
+/* input:focus.error { */
+#name-field:focus.error {
+  outline: none;
+  padding: 15px;
+  border: 2px solid #ee0404;
+}
+
+.no-copy {
+  user-select: none;
+}
+
+/* .shake{
+  animation: shake 0.2s ease-in-out 0s 2 !important;
+} */
+#missing-name.show.shake, #missing-img.show.shake {
+  animation: shake 0.2s ease-in-out 0s 2 !important;
+}
+
+#missing-name, #missing-img {
+  align-items: left;
+  text-align: left;
+  font-size: 14px;
+  color: #ee0404;
+  max-height: 0;
+  opacity: 0;
+  padding: 0;
+  transition: 150ms;
+}
+
+#missing-name.show, #missing-img.show {
+  margin-left: .5rem;
+  max-height: 32px;
+  opacity: 100%;
+  padding: 8px 0 0 0;
+  transition: 150ms;
+}
+
+
+/* #missing-name.shake {
+  animation: shake 0.2s ease-in-out 0s 2 !important;
+} */
+
+@keyframes shake {
+  0% { margin-left: 0.5rem; }
+  25% { margin-left: 1rem; }
+  75% { margin-left: 0rem; }
+  100% { margin-left: .5rem; }
+}

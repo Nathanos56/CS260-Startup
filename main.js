@@ -1,4 +1,4 @@
-// CONFETTI
+// CONFETTI & FORM SUBMISSION
 
 const submit_confetti_button = document.getElementById("submit-confetti");
 const success_msg = document.getElementById('success-msg');
@@ -7,17 +7,73 @@ const name_group = document.getElementById('name-group');
 const hey_user = document.getElementById('hey-user');
 const welcome = document.getElementById('welcome');
 
-submit_confetti_button.addEventListener('click', () => {
-    // get the inputs from form
-    const inputs = document.getElementById("form").getElementsByTagName("input");
+// for the show errors
+const emptyNameField = document.getElementById('missing-name');
+const nameField = document.getElementById('name-field');
+const missing_img = document.getElementById('missing-img');
+const img_button = document.getElementById('customFile1');
 
-    // check if inputs are empty
-    for (let i = 0; i < inputs.length; ++i) {
-      if (inputs[i].value === "") {
-        alert("Please fill out all required fields!");
-        return false; // Prevent form submission
-      }
+// SHAKE
+emptyNameField.addEventListener("animationend", function() {
+    emptyNameField.classList.toggle('shake');
+});
+missing_img.addEventListener("animationend", function() {
+    missing_img.classList.toggle('shake');
+});
+
+// remove empty error when user enters data
+nameField.addEventListener('input',  () => {
+    if (nameField.value !== "") {
+        emptyNameField.classList.remove("show");
     }
+});
+img_button.addEventListener('input',  () => {
+    if (img_button.value !== "") {
+        missing_img.classList.remove("show");
+    }
+});
+
+// check if it's still empty when they click off the field
+nameField.addEventListener("blur", () => {
+    if (nameField.value === "") {
+        emptyNameField.classList.add("show");
+    } else {
+        emptyNameField.classList.remove("show");
+        nameField.classList.remove('error');
+   }
+});
+
+submit_confetti_button.addEventListener('click', () => {
+    let isError = false;
+
+    // shakes empty error when it's visible
+    if (emptyNameField.classList.contains('show') || missing_img.classList.contains('show')) {
+        emptyNameField.classList.toggle('shake');
+        missing_img.classList.toggle('shake');
+    };
+     
+    if (nameField.value === "") {
+        nameField.classList.add('error');
+        emptyNameField.classList.add('show');
+        isError = true;
+    } else {
+        emptyNameField.classList.remove('error');
+        emptyNameField.classList.remove('show');
+    };
+
+    if (img_button.value === "") {
+        img_button.classList.add('error');
+        missing_img.classList.add('show');
+        isError = true;
+    } else {
+        missing_img.classList.remove('error');
+        missing_img.classList.remove('show');
+    };
+    
+    if (isError) {return false}
+
+    nameField.classList.remove('error');
+    
 
     const userH1 = hey_user.querySelector('h1');
     localStorage.setItem("userName", (document.querySelector("#name-field")).value);
@@ -30,6 +86,8 @@ submit_confetti_button.addEventListener('click', () => {
     welcome.classList.add('d-none');
     hey_user.classList.remove('d-none');
     userH1.textContent = userH1.textContent.replace('user', localStorage.getItem('userName'));
+
+    return false;
 });
 
 function initialConfetti() {

@@ -54,36 +54,37 @@
             <div id="content">
                 <div class="empty-section"></div>
                 <div class="centered-section mt-5">
-                    <div class="card shadow p-5 mb-5 bg-white mx-auto" style="max-width: 70vw; border-radius: 1.3rem;">
+                    <div class="card shadow p-5 mb-5 bg-white mx-auto no-copy" style="max-width: 70vw; border-radius: 1.3rem;">
                         <form id="form">
                             <div id="welcome">
-                                <h1 style="text-align: center;">Welcome!</h1>
+                                <h1 class="no-copy" style="text-align: center;">Welcome!</h1>
                                 <br>
                             </div>
                             <div id="name-group" class="form-group">
                                 <input class="custom-shadow" type="name" id="name-field" placeholder=" " required>
                                 <label id="name-label" for="name-field" style="font-size: 16px;">Your name here</label>
-                                <br><br><br>
+                                <div class="no-copy" id="missing-name">Please enter your name</div>
+                                <br><br>
                             </div>
                             <div id="hey-user" class="d-none">
                                 <h1 style="text-align: center;">Hey user!</h1>
                                 <br><br>
                             </div>
                             <div class="mb-4 d-flex justify-content-center">
-                                <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                                <img class="no-copy" id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
                                 alt="example placeholder" style="width: 300px;" />
                             </div>
                             <br>
                             <div class="d-flex justify-content-center">
-                                <div id="choose-img" class="btn btn-primary btn-rounded">
+                                <div id="choose-img" class="btn btn-success rounded me-5" style="width: 60%;">
                                     <label class="form-label text-white m-1" for="customFile1">Choose image</label>
                                     <input type="file" class="form-control d-none" id="customFile1" onchange="previewImage(event, 'selectedImage')" required/>
                                 </div>
-                                &nbsp &nbsp 
-                                <button type="button" id="submit-confetti" class="btn btn-primary">Upload</button>
+                                <button type="button" id="submit-confetti" class="btn btn-primary rounded" style="width: 40%;">Upload</button>
                             </div>
+                            <div class="no-copy" id="missing-img">Please select an image</div>
                             <div id="success-msg" class="d-none">
-                                <h3 >Your image was accepted</h3>
+                                <h3>Your image was accepted</h3>
                             </div>
                             
                         </form>

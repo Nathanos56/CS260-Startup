@@ -191,8 +191,6 @@ login_button.addEventListener('click', () => {
 
 // remove empty error when user enters data
 adminName.addEventListener('input',  () => {
-    console.log("i made it in");
-    
     if (adminName.value !== "") {
         emptyNameField.classList.remove("show");
     }
