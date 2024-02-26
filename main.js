@@ -6,12 +6,28 @@ const choose_img = document.getElementById('choose-img');
 const name_group = document.getElementById('name-group');
 const hey_user = document.getElementById('hey-user');
 const welcome = document.getElementById('welcome');
+const userH1 = hey_user.querySelector('h1');
 
 // for the show errors
 const emptyNameField = document.getElementById('missing-name');
 const nameField = document.getElementById('name-field');
 const missing_img = document.getElementById('missing-img');
 const img_button = document.getElementById('customFile1');
+
+
+const nameIsCached = isNameCached();
+// hides name field if there is a cached name
+function isNameCached() {
+    const name = localStorage.getItem("userName");
+    if (name) {
+        name_group.classList.add('d-none');
+        welcome.classList.add('d-none');
+        hey_user.classList.remove('d-none');
+        userH1.textContent = userH1.textContent.replace('user', localStorage.getItem('userName'));
+        return true;
+    }
+    return false;
+}
 
 // SHAKE
 emptyNameField.addEventListener("animationend", function() {
@@ -52,7 +68,7 @@ submit_confetti_button.addEventListener('click', () => {
         missing_img.classList.toggle('shake');
     };
      
-    if (nameField.value === "") {
+    if (nameField.value === "" && !nameIsCached) {
         nameField.classList.add('error');
         emptyNameField.classList.add('show');
         isError = true;
@@ -74,9 +90,9 @@ submit_confetti_button.addEventListener('click', () => {
 
     nameField.classList.remove('error');
     
-
-    const userH1 = hey_user.querySelector('h1');
-    localStorage.setItem("userName", (document.querySelector("#name-field")).value);
+    // only change cached name if there isn't already one
+    if (!nameIsCached) {localStorage.setItem("userName", (document.querySelector("#name-field")).value);};
+   
     initialConfetti();
     randomConfetti();
     success_msg.classList.remove('d-none');
@@ -120,9 +136,9 @@ function initialConfetti() {
 function randomConfetti() {
     const interval = 200; // interval between explosions in ms
     const numExplosions = 5;
-    let count = 0   // Counter for tracking explosions
+    let count = 0   // counter for tracking explosions
 
-    // Create confetti explosions at the set interval until the stop point
+    // creates confetti at the set interval until it reaches count
     let intervalId = setInterval(() => {
         confetti({
             particleCount: 50,  // 50
@@ -308,3 +324,7 @@ else {
 // make dark mode look prettier
 //   fix name field on dark mode
 //   change confetti colors
+// make darkmode dropdown arrow spin
+
+
+

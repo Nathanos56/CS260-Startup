@@ -179,13 +179,12 @@ login_button.addEventListener('click', () => {
     const adminName = (document.querySelector("#username-field")).value;
     const adminPass = (document.querySelector("#password-field")).value;
     localStorage.setItem("adminName", adminName);
-    const userDetails = { name: adminName, password: adminPass};
+    const adminDetails = { name: adminName, password: adminPass};
 
     username_field.classList.remove('error');
     pass_field.classList.remove('error');
 
-    // the console complains if it returns true
-    return false;
+    window.location.href = "/admin.html";
 });
 
 

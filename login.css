@@ -119,6 +119,7 @@ input:focus.error {
 }
 
 #missing-pass.show, #missing-name.show {
+    margin-left: .5rem;
     max-height: 32px;
     opacity: 100%;
     padding: 8px 0 0 0;
@@ -130,10 +131,14 @@ input:focus.error {
 }
 
 @keyframes shake {
-    0% { margin-left: 0rem; }
+    /* 0% { margin-left: 0rem; }
     25% { margin-left: 0.5rem; }
     75% { margin-left: -0.5rem; }
-    100% { margin-left: 0rem; }
+    100% { margin-left: 0rem; } */
+    0% { margin-left: 0.5rem; }
+    25% { margin-left: 1rem; }
+    75% { margin-left: 0rem; }
+    100% { margin-left: .5rem; }
 }
 
 
