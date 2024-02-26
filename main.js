@@ -1,4 +1,4 @@
-// CONFETTI & FORM SUBMISSION
+//FORM SUBMISSION
 
 const submit_confetti_button = document.getElementById("submit-confetti");
 const success_msg = document.getElementById('success-msg');
@@ -89,6 +89,11 @@ submit_confetti_button.addEventListener('click', () => {
 
     return false;
 });
+
+
+
+
+// CONFETTI
 
 function initialConfetti() {
     // for testing confetti options

@@ -9,6 +9,8 @@
 /* only moving the min-height from the body section to the main section fixes it */
 /* I have no idea how to fix it */
 
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 body {
     min-height: 100vh;
     display: flex;
@@ -65,6 +67,7 @@ label {
     background: #fff;
     transition: all 150ms ease;
     transform: translate(12px, -41px);
+    font-family: "Open Sans", Arial, sans-serif;
 }
 
 /* outlones text field blue when focused w/ no error */
@@ -94,6 +97,7 @@ input.error {
 input.error + label {
     background: rgba(#ee0404, 0.96);
     color: #ee0404;
+    font-family: "Open Sans", Arial, sans-serif;
 }
 input:focus.error {
     outline: none;

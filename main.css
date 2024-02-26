@@ -170,6 +170,7 @@ input.error + label {
 /* #name-field.error + label { */
   background: rgba(#ee0404, 0.96);
   color: #ee0404 !important;
+  font-family: "Open Sans", Arial, sans-serif;
 }
 /* input:focus.error { */
 #name-field:focus.error {
