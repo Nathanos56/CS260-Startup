@@ -43,4 +43,13 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - There are placeholder images until I can replace them with user-generated images.
 
 ## JavaScript Deliverable
+- Admin login details are added to an object so they can later be pushed to the server.
+- When the user enters their name on the homepage, the page says hi back.
+- The user's name is saved to the local storage so the page remembers them in the future.
+- The changing images on the homepage are the mocked database data.
+- The changing images are also the mocked WebSocket because it will update when a new image is accepted.
+- I am also using local storage to remember the user's light/dark mode preferences.
+- My name and GitHub link are in the footer.
+
+## Websocket Deliverable
 - 
