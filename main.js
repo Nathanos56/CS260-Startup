@@ -329,3 +329,19 @@ else {
 
 
 // MOCKED SERVER DATA
+const recent_1 = document.getElementById('recent-1');
+const recent_2 = document.getElementById('recent-2');
+const recent_3 = document.getElementById('recent-3');
+
+// const recentImages = [recent_1, recent_2, recent_3];
+const images = ['aiEarth.png', 'aiGeo.png', 'aiRain.png', 'aiRound.jpg', 'aiWaves.png', 'aiWin.jpg', 'aiWin2.jpg'];
+
+let i = 0;
+function mockedRecentImages() {
+    recent_3.src = recent_2.src;
+    recent_2.src = recent_1.src;
+    recent_1.src = 'images/' + images[i % images.length];
+    ++i;
+}
+
+setInterval(mockedRecentImages, 5000); //5s
