@@ -11,9 +11,16 @@
 - ``test``   selects the HTML element "test"
 - ``.test``  selects the class "test"
 - ``#test``  selects the object with the id "test"
+- ``svh`` & ``dvh``
 
 ### JavaScript
-- 
+- ``localStorage.setItem("lightSwitch", "dark");``
+- ``document.querySelector('.navbar').classList.remove('navbar-light', 'bg-light');``
+- ``document.getElementById('dropdown-img-main').src = 'bootstrap-icons/sun-fill.svg';``
+- ``allHTML.dataset.bsTheme = mode;``
+- ``function DarkModeDefault() {
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {return "dark"} else {return "light"}
+}``
 
 ### SSH
 - ``ssh -i [key pair file] ubuntu@[yourdomainnamehere]``
