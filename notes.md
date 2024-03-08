@@ -8,17 +8,24 @@
 
 ### CSS
 - ``@media (max-width: 810px) {}``
+- ``test``   selects the HTML element "test"
+- ``.test``  selects the class "test"
+- ``#test``  selects the object with the id "test"
+
+### JavaScript
+- 
 
 ### SSH
 - ``ssh -i [key pair file] ubuntu@[yourdomainnamehere]``
 ### Other
 - ``./deployFiles.sh -k <yourpemkey> -h <yourdomain> -s startup``    Use git-bash
+- ``./deployService.sh -k <yourpemkey> -h <yourdomain> -s startup``  use git-bash
 
 ## Checklist:
 - [X] Set up AWS
 - [X] HTTPS
 - [X] Startup HTML
 - [X] Startup CSS
-- [ ] Startup JavaScript
+- [X] Startup JavaScript
 - [ ] Startup WebSocket
 - [ ] Startup React
