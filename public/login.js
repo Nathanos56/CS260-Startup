@@ -178,6 +178,25 @@ login_button.addEventListener('click', () => {
 
     const adminName = (document.querySelector("#username-field")).value;
     const adminPass = (document.querySelector("#password-field")).value;
+
+    // ADD THIS ONCE WE START USING THE DATABASE
+
+    // fetch('/login', {
+    //     method: 'POST',
+    //     // headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // For FormData
+    //     body: JSON.stringify({ username, password }) // Or send data as FormData
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     // Handle successful login response (data)
+    //     console.log('Login successful:', data);
+    //     // Redirect or display success message
+    //   })
+    //   .catch(error => {
+    //     console.error('Login error:', error);
+    //     // Display error message to user
+    //   });
+    // });
     localStorage.setItem("adminName", adminName);
     const adminDetails = { name: adminName, password: adminPass};
 

@@ -1,3 +1,6 @@
+// USE FORM DATA BECAUSE OF THE IMAGE
+
+
 //FORM SUBMISSION
 
 const submit_confetti_button = document.getElementById("submit-confetti");
