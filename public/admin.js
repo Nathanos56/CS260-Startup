@@ -1,3 +1,9 @@
+const CLIENT_ID = "598146296919-7p7nb9h9117i5pkipe1ht3qq3d9hk6mk.apps.googleusercontent.com";
+const API_KEY = "AIzaSyBNcZc3IRxrGE86M00mxJoUprrLMfUrJvA";
+const DISCORVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/vs/rest"];
+const SCOPES = "https://www.googleapis.com/auth/drive";
+
+
 // DARK MODE
 
 const allHTML = document.getElementById('html');
