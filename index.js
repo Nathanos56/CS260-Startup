@@ -27,6 +27,15 @@ app.listen(port, () => {
 });
 
 
+
+
+
+
+
+
+
+
+
 // ADD THIS ONCE WE START USING THE DATABASE
 
 // app.post('/login', async (req, res) => {
@@ -52,16 +61,17 @@ app.listen(port, () => {
 
 
 
+
 // I think these are simon exclusive
 
-// GetScores
-apiRouter.get('/scores', (_req, res) => {
-  res.send(scores);
-});
+// // GetScores
+// apiRouter.get('/scores', (_req, res) => {
+//   res.send(scores);
+// });
 
-// SubmitScore
-apiRouter.post('/score', (req, res) => {
-  scores = updateScores(req.body, scores);
-  res.send(scores);
-});
+// // SubmitScore
+// apiRouter.post('/score', (req, res) => {
+//   scores = updateScores(req.body, scores);
+//   res.send(scores);
+// });
 
