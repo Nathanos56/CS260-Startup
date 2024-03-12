@@ -2,7 +2,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const app = express();
-app.use(bodyParser.json());
+
+// JSON body parsing using built-in middleware
+app.use(express.json());
+// app.use(bodyParser.json());
 
 
 // LOGIN
@@ -35,15 +38,29 @@ app.post('/login', async (req, res) => {
   res.json({ token });
 });
 
+app.get('/login', (req, res) => {
+  res.sendFile('login.html', { root: 'public' });
+});
+
 
 // ADMIN PAGE
 app.get('/admin', (req, res) => {
   res.sendFile('admin.html', { root: 'public' });
 });
 
-app.get('/login', (req, res) => {
-  res.sendFile('login.html', { root: 'public' });
+app.post('/admin', async (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (token == null) return res.status(401).json({message: "No token given"}); // if there isn't any token
+
+  jwt.verify(token, secretKey, (err, user) => {
+    if (err) return res.status(403).json({message: "Invalid token"});
+    req.user = user;
+    res.json({ message: 'Token is valid!' });
+  });
 });
+
 
 
 
@@ -51,9 +68,6 @@ app.get('/login', (req, res) => {
 
 // The service port. In production the frontend code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
-
-// JSON body parsing using built-in middleware
-app.use(express.json());
 
 // Serve up the frontend static content hosting
 app.use(express.static('public'));

@@ -1,7 +1,8 @@
-const CLIENT_ID = "598146296919-7p7nb9h9117i5pkipe1ht3qq3d9hk6mk.apps.googleusercontent.com";
-const API_KEY = "AIzaSyBNcZc3IRxrGE86M00mxJoUprrLMfUrJvA";
-const DISCORVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/vs/rest"];
-const SCOPES = "https://www.googleapis.com/auth/drive";
+// I need a local file with these
+// const CLIENT_ID = "";
+// const API_KEY = "";
+// const DISCORVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/vs/rest"];
+// const SCOPES = "https://www.googleapis.com/auth/drive";
 
 
 
@@ -142,3 +143,23 @@ else {
     toggleMode('light');
     dropIcons('light');
 };
+
+
+// Accept/reject
+const accept_button = document.getElementById('accept-button');
+const reject_button = document.getElementById('reject-button');
+
+accept_button.addEventListener('click', () => {
+    fetch('/admin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // the token is a variable that holds your token
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data.message))
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  });
