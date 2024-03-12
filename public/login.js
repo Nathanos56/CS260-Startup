@@ -147,7 +147,7 @@ emptyPassField.addEventListener("animationend", function() {
 });
 
 
-login_button.addEventListener('click', () => {
+login_button.addEventListener('click', async () => {
     let isError = false;
 
     // shakes empty error when it's visible
@@ -179,32 +179,39 @@ login_button.addEventListener('click', () => {
     const adminName = (document.querySelector("#username-field")).value;
     const adminPass = (document.querySelector("#password-field")).value;
 
-    // ADD THIS ONCE WE START USING THE DATABASE
-
-    // fetch('/login', {
-    //     method: 'POST',
-    //     // headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, // For FormData
-    //     body: JSON.stringify({ username, password }) // Or send data as FormData
-    //   })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     // Handle successful login response (data)
-    //     console.log('Login successful:', data);
-    //     // Redirect or display success message
-    //   })
-    //   .catch(error => {
-    //     console.error('Login error:', error);
-    //     // Display error message to user
-    //   });
-    // });
     localStorage.setItem("adminName", adminName);
     const adminDetails = { name: adminName, password: adminPass};
 
     username_field.classList.remove('error');
     pass_field.classList.remove('error');
 
-    window.location.href = "/admin.html";
+
+
+    await handleLogin(adminName, adminPass);
 });
+
+async function handleLogin(adminName, adminPass) {
+    const response = await fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: adminName, password: adminPass })
+    });
+  
+    if (!response.ok) {
+        // error logging in
+        console.error('Login failed:', response.statusText);
+        return;
+    }
+  
+    const data = await response.json();
+    if (data.token) {
+        localStorage.setItem('accessToken', data.token);
+        window.location.href = '/admin'; // Redirect to admin page on successful login
+    } else {
+        // invalid credentials
+        console.error('Invalid login credentials');
+    }
+};
 
 
 // remove empty error when user enters data
@@ -254,3 +261,39 @@ adminPass.addEventListener("blur", () => {
 // }
 
 
+// login functions
+// Assuming you have a login functionality that sends login credentials
+
+// async function handleLogin(email, password) {
+//     const response = await fetch('/login', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ email, password })
+//     });
+  
+//     const data = await response.json();
+//     if (data.token) {
+//       localStorage.setItem('accessToken', data.token);
+//     } else {
+//       // Handle login error
+//     }
+//   }
+  
+//   async function getAdminData() {
+//     const token = localStorage.getItem('accessToken');
+//     if (!token) {
+//       // Handle no token scenario (redirect to login?)
+//       return;
+//     }
+  
+//     try {
+//       const response = await fetch('/protected-admin-data', {
+//         headers: { Authorization: `Bearer ${token}` }
+//       });
+  
+//       const data = await response.json();
+//       console.log(data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
