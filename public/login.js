@@ -188,10 +188,21 @@ login_button.addEventListener('click', async () => {
 
 
     await handleLogin(adminName, adminPass);
+    fetch('/admin', {
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // user's token
+    }
+    })
+    .then(response => {
+    // Handle response
+    })
+    .catch(error => {
+    // Handle error
+    });
 });
 
 async function handleLogin(adminName, adminPass) {
-    const response = await fetch('/login', {
+    const response = await fetch('/login-api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: adminName, password: adminPass })
@@ -206,12 +217,28 @@ async function handleLogin(adminName, adminPass) {
     const data = await response.json();
     if (data.token) {
         localStorage.setItem('accessToken', data.token);
-        window.location.href = '/admin'; // Redirect to admin page on successful login
+        // sendToken('/admin'); // Redirect to admin page on successful login
+        // window.location.href = '/admin'; 
     } else {
         // invalid credentials
         console.error('Invalid login credentials');
     }
 };
+
+function sendToken(api) {
+    fetch(api, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // user's token
+        }
+    })
+      .then(response => response.json())
+      .then(data => console.log(data.message))
+      .catch((error) => {
+        console.error('Error:', error);
+    });
+}
 
 
 // remove empty error when user enters data

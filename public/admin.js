@@ -150,16 +150,24 @@ const accept_button = document.getElementById('accept-button');
 const reject_button = document.getElementById('reject-button');
 
 accept_button.addEventListener('click', () => {
-    fetch('/admin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // the token is a variable that holds your token
-      }
-    })
-    .then(response => response.json())
-    .then(data => console.log(data.message))
-    .catch((error) => {
-      console.error('Error:', error);
+    sendToken('/accept-api');
+});
+
+reject_button.addEventListener('click', () => {
+    sendToken('/reject-api');
+});
+
+function sendToken(api) {
+    fetch(api, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // user's token
+        }
+      })
+      .then(response => response.json())
+      .then(data => console.log(data.message))
+      .catch((error) => {
+        console.error('Error:', error);
     });
-  });
+}

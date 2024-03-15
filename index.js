@@ -26,7 +26,7 @@ function generateAccessToken(userId) {
   return jwt.sign({ userId }, secretKey, { expiresIn: '1h' }); // Token expires in 1 hour
 }
 
-app.post('/login', async (req, res) => {
+app.post('/login-api', async (req, res) => {
   const { email, password } = req.body;
 
   const user = validateCredentials(email, password);
@@ -43,24 +43,34 @@ app.get('/login', (req, res) => {
 });
 
 
+
 // ADMIN PAGE
-app.get('/admin', (req, res) => {
+app.get('/admin', checkToken, (req, res) => {
   res.sendFile('admin.html', { root: 'public' });
+  // res.json({ redirectUrl: '/admin' });
+  // return res.redirect('/admin');
+  // res.writeHead(302, {Location: '/admin'});
+  // req.end();
 });
 
-app.post('/admin', async (req, res, next) => {
+app.post('/accept-api', checkToken, async (req, res, next) => {
+  
+});
+
+app.post('/reject-api', checkToken, async (req, res, next) => {
+  
+});
+
+function checkToken(req, res, next) {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (token == null) return res.status(401).json({message: "No token given"}); // if there isn't any token
-
   jwt.verify(token, secretKey, (err, user) => {
-    if (err) return res.status(403).json({message: "Invalid token"});
+    if (err) return res.redirect('/login');
     req.user = user;
-    res.json({ message: 'Token is valid!' });
+    next();
   });
-});
-
+};
 
 
 
