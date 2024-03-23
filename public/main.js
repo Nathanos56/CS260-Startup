@@ -96,6 +96,9 @@ submit_confetti_button.addEventListener('click', () => {
     // only change cached name if there isn't already one
     if (!nameIsCached) {localStorage.setItem("userName", (document.querySelector("#name-field")).value);};
    
+    // upload image to backend
+
+
     initialConfetti();
     randomConfetti();
     success_msg.classList.remove('d-none');
@@ -109,7 +112,25 @@ submit_confetti_button.addEventListener('click', () => {
     return false;
 });
 
+async function uploadFile() {
+  const file = img_button.files[0];
+  if (file) {
+    const formData = new FormData();
+    formData.append('file', file);
 
+    const response = await fetch('/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+        console.log(response);
+    } else {
+      alert(data.message);
+    }
+  }
+}
 
 
 // CONFETTI
@@ -161,14 +182,6 @@ function randomConfetti() {
             clearInterval(intervalId);
         }
     }, interval);
-}
-
-
-
-
-
-function saveImage() {
-
 }
 
 
