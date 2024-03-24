@@ -187,14 +187,14 @@ login_button.addEventListener('click', async () => {
 
 
 
-    // await handleLogin(adminName, adminPass);
 
+    // send credentials to the backend
     const response = await fetch('/login-api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: adminName, password: adminPass })
     });
-    
+    // try accessing /admin if the backend sends good vibes
     if (response.ok) {
         const data = await response.json();
         if (data.message === 'Login successful') {
@@ -203,25 +203,11 @@ login_button.addEventListener('click', async () => {
             console.error('Login failed:', data.message);
         }
     } else {
-    console.error('Login API request failed:', response.statusText);
+        console.error('Login API request failed:', response.statusText);
     }
+
+    return false;
 });
-
-async function handleLogin(adminName, adminPass) {
-    const response = await fetch('/login-api', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: adminName, password: adminPass })
-    });
-    
-    console.error(response.statusText);
-
-    if (!response.ok) {
-        // error logging in
-        console.error(response.statusText);
-        return;
-    }
-};
 
 
 // remove empty error when user enters data

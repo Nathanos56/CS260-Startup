@@ -4,26 +4,58 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const multer = require('multer');
 const cookieParser = require('cookie-parser');
+const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
 
 app.use(cookieParser());
+app.use(express.json());;
 
-// JSON body parsing using built-in middleware
-app.use(express.json());
-// app.use(bodyParser.json());
+
+
+// MONGODB
+const config = require('./dbConfig.json');
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+const client = new MongoClient(url);
+
+async function hashPassword(password) {
+  const saltRounds = 10; // Adjust as needed
+  const hashedPassword = await bcrypt.hash(password, saltRounds);
+  return hashedPassword;
+}
+
+
+
 
 
 // LOGIN
 // REPLACE BEFORE PRODUCTION!
-const secretKey = 'secretKey'; // Not secure!
+const secretKey = config.secretKey; // Not secure!
 
-const users = [
-  { id: 1, email: 'admin@example.com', password: 'admin' }, // Insecure storage, replace with database
-];
+async function validateCredentials(email, password) {
+  try {
+    await client.connect();
+    const db = client.db('cred');
+    const usersCollection = db.collection('admin');
 
-function validateCredentials(email, password) {
-  // Replace user credential validation logic (database lookup, password hashing)
-  const user = users.find(u => u.email === email && u.password === password);
-  return user;
+    const user = await usersCollection.findOne({ email });
+
+    if (!user) {
+      return null; // User not found
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (isMatch) {
+      return user; // Credentials valid
+    } else {
+      return null; // Invalid password
+    }
+  } catch (err) {
+    // Handle errors
+    return null;
+  } finally {
+    await client.close();
+  }
 }
 
 function generateAccessToken(userId) {
@@ -33,7 +65,7 @@ function generateAccessToken(userId) {
 app.post('/login-api', async (req, res) => {
   const { email, password } = req.body;
 
-  const user = validateCredentials(email, password);
+  const user = await validateCredentials(email, password);
   if (!user) {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
