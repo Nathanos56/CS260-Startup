@@ -28,8 +28,7 @@ async function hashPassword(password) {
 
 
 // LOGIN
-// REPLACE BEFORE PRODUCTION!
-const secretKey = config.secretKey; // Not secure!
+const secretKey = config.secretKey;
 
 async function validateCredentials(email, password) {
   try {
@@ -111,39 +110,32 @@ function checkToken(req, res, next) {
 
 
 // FILE UPLOAD
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: 'uploads/',
-    filename: (req, file, cb) => {
-      const filetype = file.originalname.split('.').pop();
-      const id = Math.round(Math.random() * 1e9);
-      const filename = `${id}.${filetype}`;
-      cb(null, filename);
-    },
-  }),
-  limits: { fileSize: 64000 },
-});
+const limits = { fileSize: 2048576 }; // ~2 MB limit
+const storage = multer.memoryStorage(); // Store images in memory temporarily
+const upload = multer({ storage, limits });
 
-app.post('/upload', upload.single('file'), (req, res) => {
-  if (req.file) {
-    res.send({
-      message: 'Uploaded succeeded',
-      file: req.file.filename,
+app.post('/upload', checkToken, upload.single('image'), async (req, res) => {
+  try {
+    await client.connect();
+    const db = client.db('img');
+    const imagesCollection = db.collection('user');
+
+    // Get the image data from the request
+    const imageBuffer = req.file.buffer;
+    const userName = req.body.userName;
+
+    // Store the image in MongoDB
+    const image = await imagesCollection.insertOne({
+      image: imageBuffer, // Store the image as a Buffer
+      userName: userName,
     });
-  } else {
-    res.status(400).send({ message: 'Upload failed' });
-  }
-});
 
-app.get('/file/:filename', (req, res) => {
-  res.sendFile(__dirname + `/uploads/${req.params.filename}`);
-});
-
-app.use((err, req, res, next) => {
-  if (err instanceof multer.MulterError) {
-    res.status(413).send({ message: err.message });
-  } else {
-    res.status(500).send({ message: err.message });
+    res.json({ message: 'Image uploaded successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Failed to upload image' });
+  } finally {
+    await client.close();
   }
 });
 

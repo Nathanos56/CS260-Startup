@@ -97,7 +97,7 @@ submit_confetti_button.addEventListener('click', () => {
     if (!nameIsCached) {localStorage.setItem("userName", (document.querySelector("#name-field")).value);};
    
     // upload image to backend
-
+    uploadFile();
 
     initialConfetti();
     randomConfetti();
@@ -116,7 +116,7 @@ async function uploadFile() {
   const file = img_button.files[0];
   if (file) {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('image', file);
 
     const response = await fetch('/upload', {
       method: 'POST',
