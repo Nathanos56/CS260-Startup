@@ -3,6 +3,9 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const app = express();
 const multer = require('multer');
+const cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -36,7 +39,8 @@ app.post('/login-api', async (req, res) => {
   }
 
   const token = generateAccessToken(user.id);
-  res.json({ token });
+  res.cookie('token', token, { httpOnly: true });
+  res.json({ message: 'Login successful' });
 });
 
 app.get('/login', (req, res) => {
@@ -48,10 +52,6 @@ app.get('/login', (req, res) => {
 // ADMIN PAGE
 app.get('/admin', checkToken, (req, res) => {
   res.sendFile('admin.html', { root: 'public' });
-  // res.json({ redirectUrl: '/admin' });
-  // return res.redirect('/admin');
-  // res.writeHead(302, {Location: '/admin'});
-  // req.end();
 });
 
 app.post('/accept-api', checkToken, async (req, res, next) => {
@@ -63,11 +63,12 @@ app.post('/reject-api', checkToken, async (req, res, next) => {
 });
 
 function checkToken(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
+  const token = req.cookies.token;
+  if (!token) return res.redirect('/login'); // Redirect if no token found
 
   jwt.verify(token, secretKey, (err, user) => {
-    if (err) return res.redirect('/login');
+    if (err) return res.redirect('/login'); // Redirect on verification error
+
     req.user = user;
     next();
   });

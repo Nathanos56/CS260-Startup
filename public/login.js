@@ -187,18 +187,24 @@ login_button.addEventListener('click', async () => {
 
 
 
-    await handleLogin(adminName, adminPass);
-    fetch('/admin', {
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // user's token
-    }
-    })
-    .then(response => {
-    // Handle response
-    })
-    .catch(error => {
-    // Handle error
+    // await handleLogin(adminName, adminPass);
+
+    const response = await fetch('/login-api', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: adminName, password: adminPass })
     });
+    
+    if (response.ok) {
+        const data = await response.json();
+        if (data.message === 'Login successful') {
+            location.href = '/admin';
+        } else {
+            console.error('Login failed:', data.message);
+        }
+    } else {
+    console.error('Login API request failed:', response.statusText);
+    }
 });
 
 async function handleLogin(adminName, adminPass) {
@@ -207,38 +213,15 @@ async function handleLogin(adminName, adminPass) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: adminName, password: adminPass })
     });
-  
+    
+    console.error(response.statusText);
+
     if (!response.ok) {
         // error logging in
-        console.error('Login failed:', response.statusText);
+        console.error(response.statusText);
         return;
     }
-  
-    const data = await response.json();
-    if (data.token) {
-        localStorage.setItem('accessToken', data.token);
-        // sendToken('/admin'); // Redirect to admin page on successful login
-        // window.location.href = '/admin'; 
-    } else {
-        // invalid credentials
-        console.error('Invalid login credentials');
-    }
 };
-
-function sendToken(api) {
-    fetch(api, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // user's token
-        }
-    })
-      .then(response => response.json())
-      .then(data => console.log(data.message))
-      .catch((error) => {
-        console.error('Error:', error);
-    });
-}
 
 
 // remove empty error when user enters data
