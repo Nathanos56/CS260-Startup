@@ -62,7 +62,7 @@ nameField.addEventListener("blur", () => {
    }
 });
 
-submit_confetti_button.addEventListener('click', () => {
+submit_confetti_button.addEventListener('click', async () => {
     let isError = false;
 
     // shakes empty error when it's visible
@@ -97,7 +97,8 @@ submit_confetti_button.addEventListener('click', () => {
     if (!nameIsCached) {localStorage.setItem("userName", (document.querySelector("#name-field")).value);};
    
     // upload image to backend
-    if (!uploadFile()) {
+    const uploadSuccessful = await uploadFile();
+    if (!uploadSuccessful) {
         return false;
     }
 
@@ -117,7 +118,7 @@ submit_confetti_button.addEventListener('click', () => {
 async function uploadFile() {
   const file = img_button.files[0];
   if (file) {
-    if (!file.mimetype.startsWith('image/')) {
+    if (!file.type.startsWith('image/')) {
         alert('Only image files (png, jpg, jpeg) are allowed!');
         return false;
     }
@@ -200,9 +201,9 @@ function randomConfetti() {
 
 function previewImage(event, previewId) {
     const imagePreview = document.getElementById(previewId);
-  
+
     // if file is selected
-    if (event.target.files && event.target.files[0]) {  //checks if the object exists then if there's stuff in it
+    if (event.target.files && event.target.files[0] && event.target.files[0].type.startsWith('image/')) {  //checks if the object exists then if there's stuff in it
         // read file
         const reader = new FileReader();
 
@@ -217,6 +218,10 @@ function previewImage(event, previewId) {
     } else {
         // no file selected, put placeholder image back
         imagePreview.src = "https://mdbootstrap.com/img/Photos/Others/placeholder.jpg";
+
+        if (!event.target.files[0].type.startsWith('image/')) {
+            alert('Only image files (png, jpg, jpeg) are allowed!');
+        }
     }
 }
 
