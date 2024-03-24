@@ -97,7 +97,9 @@ submit_confetti_button.addEventListener('click', () => {
     if (!nameIsCached) {localStorage.setItem("userName", (document.querySelector("#name-field")).value);};
    
     // upload image to backend
-    uploadFile();
+    if (!uploadFile()) {
+        return false;
+    }
 
     initialConfetti();
     randomConfetti();
@@ -115,8 +117,14 @@ submit_confetti_button.addEventListener('click', () => {
 async function uploadFile() {
   const file = img_button.files[0];
   if (file) {
+    if (!file.mimetype.startsWith('image/')) {
+        alert('Only image files (png, jpg, jpeg) are allowed!');
+        return false;
+    }
+
     const formData = new FormData();
     formData.append('image', file);
+    formData.append('userName', localStorage.getItem('userName'));
 
     const response = await fetch('/upload', {
       method: 'POST',
@@ -126,9 +134,14 @@ async function uploadFile() {
     const data = await response.json();
     if (response.ok) {
         console.log(response);
+        return true;
     } else {
       alert(data.message);
+      return false;
     }
+  } else {
+    console.log('catastropjic error');
+    return false;
   }
 }
 
@@ -136,7 +149,6 @@ async function uploadFile() {
 // CONFETTI
 
 function initialConfetti() {
-    // for testing confetti options
     // default values are commented
     const testConfettiSettings = {
         particleCount: 150,  // 50

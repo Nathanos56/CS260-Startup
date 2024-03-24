@@ -111,8 +111,15 @@ function checkToken(req, res, next) {
 
 // FILE UPLOAD
 const limits = { fileSize: 2048576 }; // ~2 MB limit
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) {
+    cb(null, true); // Accept image files
+  } else {
+    cb(new multer.MulterError('LIMIT_FILE_TYPE', 'Only image files are allowed!'), false); // Reject non-image files
+  }
+};
 const storage = multer.memoryStorage(); // Store images in memory temporarily
-const upload = multer({ storage, limits });
+const upload = multer({ storage, limits, fileFilter });
 
 app.post('/upload', checkToken, upload.single('image'), async (req, res) => {
   try {
@@ -132,8 +139,13 @@ app.post('/upload', checkToken, upload.single('image'), async (req, res) => {
 
     res.json({ message: 'Image uploaded successfully' });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Failed to upload image' });
+    if (err instanceof multer.MulterError) {
+      console.error(err.message);
+      res.status(400).json({ message: 'Only image files are allowed!' });
+    } else {
+      console.error(err.message);
+      res.status(500).json({ message: 'Failed to upload image' });
+    }
   } finally {
     await client.close();
   }
