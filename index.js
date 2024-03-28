@@ -89,8 +89,22 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
   
 });
 
+// still working on this
 app.post('/reject-api', checkToken, async (req, res, next) => {
-  
+  try {
+    await client.connect();
+    const db = client.db('img');
+    const imagesCollection = db.collection('user');
+
+    const imgID = req.body.id;
+
+    await imagesCollection.deleteOne({ _id: imgID });
+    res.json({ message: 'Image deleted successfully' });
+  } catch (err) {
+    res.json({ message: 'ERROR Deleting img: ' + err.message });
+  } finally {
+    await client.close();
+  }
 });
 
 function checkToken(req, res, next) {
@@ -105,6 +119,27 @@ function checkToken(req, res, next) {
   });
 };
 
+app.post('/admin-img', checkToken, async (req, res, next) => {
+  try {
+    await client.connect();
+    const db = client.db('img');
+    const imagesCollection = db.collection('user');
+
+    const { num } = req.body;
+    const image = await imagesCollection.find().sort({ _id: 1 }).toArray();
+
+    if (image[num - 1]) {
+      res.json({ ...image[num-1], imageExists: true });
+    } else {
+      res.json({ imageExists: false });
+    }
+  } catch (error) {
+    console.log(error);
+  } finally {
+    await client.close();
+  }
+
+});
 
 
 
@@ -121,7 +156,7 @@ const fileFilter = (req, file, cb) => {
 const storage = multer.memoryStorage(); // Store images in memory temporarily
 const upload = multer({ storage, limits, fileFilter });
 
-app.post('/upload', checkToken, upload.single('image'), async (req, res) => {
+app.post('/upload', upload.single('image'), async (req, res) => {
   try {
     await client.connect();
     const db = client.db('img');
@@ -153,6 +188,7 @@ app.post('/upload', checkToken, upload.single('image'), async (req, res) => {
 
 
 
+// 
 
 
 
@@ -178,56 +214,3 @@ app.use((_req, res) => {
 });
 
 app.listen(3000, () => console.log('Server listening on port 3000'));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ADD THIS ONCE WE START USING THE DATABASE
-
-// app.post('/login', async (req, res) => {
-//   const { username, password } = req.body;
-
-//   // Logic to find user by username in your database
-//   const user = await findUserByUsername(username);
-
-//   if (!user) {
-//     return res.status(401).send('Invalid username or password'); // Unauthorized
-//   }
-
-//   // Compare hashed password with submitted password
-//   const isPasswordValid = await bcrypt.compare(password, user.hashedPassword);
-
-//   if (isPasswordValid) {
-//     // Successful login logic (generate session token, etc.)
-//     res.send({ message: 'Login successful!' }); // Or redirect to success page
-//   } else {
-//     res.status(401).send('Invalid username or password'); // Unauthorized
-//   }
-// });
-
-
-
-
-// I think these are simon exclusive
-
-// // GetScores
-// apiRouter.get('/scores', (_req, res) => {
-//   res.send(scores);
-// });
-
-// // SubmitScore
-// apiRouter.post('/score', (req, res) => {
-//   scores = updateScores(req.body, scores);
-//   res.send(scores);
-// });
-

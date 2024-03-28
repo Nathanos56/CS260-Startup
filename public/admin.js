@@ -149,12 +149,19 @@ else {
 const accept_button = document.getElementById('accept-button');
 const reject_button = document.getElementById('reject-button');
 
+const recent_img1 = document.getElementById('recent-1');
+const recent_img2 = document.getElementById('recent-2');
+const recent_img3 = document.getElementById('recent-3');
+
 accept_button.addEventListener('click', () => {
     sendToken('/accept-api');
 });
 
 reject_button.addEventListener('click', () => {
-    sendToken('/reject-api');
+    fetch('/reject-api', {
+        method: 'DELETE',
+        body: JSON.stringify({ id: '12345' })
+    });
 });
 
 function sendToken(api) {
@@ -171,3 +178,50 @@ function sendToken(api) {
         console.error('Error:', error);
     });
 }
+
+
+// display images
+async function fetchImage(num) {
+    const response = await fetch('/admin-img', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ num })
+    });
+  
+    if (!response.ok) {
+        console.error('Error fetching image:', response.statusText);
+        return { imageUrl: 'images/stockImage.png' };
+    } else {
+        const imageData = await response.json();
+        if (!imageData.imageExists) {
+            return { imageUrl: 'images/stockImage.png' };
+        } else {
+            const dataURL = `data:image/jpeg;base64,${imageData.image}`;
+            return { imageUrl: dataURL, imageId: imageData._id, imageName: imageData.userName };
+        }
+    } 
+}
+
+async function displayImages() {
+    const imageData1 = await fetchImage(1);
+    recent_img1.src = imageData1.imageUrl;
+    const imageData2 = await fetchImage(2);
+    recent_img2.src = imageData2.imageUrl;
+    const imageData3 = await fetchImage(3);
+    recent_img3.src = imageData3.imageUrl;
+  
+    if (imageData1.imageId) {
+        recent_img1.dataset.imageId = imageData1.imageId;
+        recent_img1.dataset.imageName = imageData1.userName;
+    }
+    if (imageData2.imageId) {
+        recent_img2.dataset.imageId = imageData2.imageId;
+        recent_img2.dataset.imageName = imageData2.userName;
+    }
+    if (imageData3.imageId) {
+        recent_img3.dataset.imageId = imageData3.imageId;
+        recent_img3.dataset.imageName = imageData3.userName;
+    }
+}
+
+displayImages(); //on page load
