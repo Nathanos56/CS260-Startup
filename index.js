@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const multer = require('multer');
 const cookieParser = require('cookie-parser');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 
 app.use(cookieParser());
@@ -15,7 +15,22 @@ app.use(express.json());;
 // MONGODB
 const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
-const client = new MongoClient(url);
+let client = new MongoClient(url);
+
+async function connectToDatabase() {
+  client = await MongoClient.connect(url);
+}
+
+connectToDatabase().then(() => {
+  console.log('Connected to MongoDB');
+});
+
+// Close the connection on server shutdown
+process.on('SIGINT', async () => {
+  await client.close();
+  console.log('MongoDB connection closed');
+  process.exit(0); // Exit gracefully
+});
 
 async function hashPassword(password) {
   const saltRounds = 10; // Adjust as needed
@@ -32,7 +47,7 @@ const secretKey = config.secretKey;
 
 async function validateCredentials(email, password) {
   try {
-    await client.connect();
+    // await client.connect();
     const db = client.db('cred');
     const usersCollection = db.collection('admin');
 
@@ -53,7 +68,7 @@ async function validateCredentials(email, password) {
     // Handle errors
     return null;
   } finally {
-    await client.close();
+    // await client.close();
   }
 }
 
@@ -90,20 +105,26 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
 });
 
 // still working on this
-app.post('/reject-api', checkToken, async (req, res, next) => {
+app.delete('/reject-api', checkToken, async (req, res, next) => {
   try {
-    await client.connect();
+    // await client.connect();
     const db = client.db('img');
     const imagesCollection = db.collection('user');
 
-    const imgID = req.body.id;
+    // const imgID = req.body.id;
+    // const imgID = new ObjectId(req.body.id);
+    const imgID = ObjectId.createFromHexString(req.body.id);
 
-    await imagesCollection.deleteOne({ _id: imgID });
-    res.json({ message: 'Image deleted successfully' });
+    const deleteResult = await imagesCollection.deleteOne({ _id: imgID });
+
+    if (deleteResult.deletedCount === 1) {
+      res.json({ message: 'Image deleted successfully' });
+    } else {
+      res.json({ message: 'The image was not deleted' });
+    }
+    // await client.close();
   } catch (err) {
     res.json({ message: 'ERROR Deleting img: ' + err.message });
-  } finally {
-    await client.close();
   }
 });
 
@@ -121,7 +142,7 @@ function checkToken(req, res, next) {
 
 app.post('/admin-img', checkToken, async (req, res, next) => {
   try {
-    await client.connect();
+    // await client.connect();
     const db = client.db('img');
     const imagesCollection = db.collection('user');
 
@@ -136,7 +157,7 @@ app.post('/admin-img', checkToken, async (req, res, next) => {
   } catch (error) {
     console.log(error);
   } finally {
-    await client.close();
+    // await client.close();
   }
 
 });
@@ -158,7 +179,7 @@ const upload = multer({ storage, limits, fileFilter });
 
 app.post('/upload', upload.single('image'), async (req, res) => {
   try {
-    await client.connect();
+    // await client.connect();
     const db = client.db('img');
     const imagesCollection = db.collection('user');
 
@@ -182,13 +203,12 @@ app.post('/upload', upload.single('image'), async (req, res) => {
       res.status(500).json({ message: 'Failed to upload image' });
     }
   } finally {
-    await client.close();
+    // await client.close();
   }
 });
 
 
 
-// 
 
 
 

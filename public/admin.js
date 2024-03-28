@@ -160,8 +160,9 @@ accept_button.addEventListener('click', () => {
 reject_button.addEventListener('click', () => {
     fetch('/reject-api', {
         method: 'DELETE',
-        body: JSON.stringify({ id: '12345' })
+        body: JSON.stringify({ id: recent_img1.dataset.imageId })
     });
+    updateImages();
 });
 
 function sendToken(api) {
@@ -205,23 +206,42 @@ async function fetchImage(num) {
 async function displayImages() {
     const imageData1 = await fetchImage(1);
     recent_img1.src = imageData1.imageUrl;
-    const imageData2 = await fetchImage(2);
-    recent_img2.src = imageData2.imageUrl;
-    const imageData3 = await fetchImage(3);
-    recent_img3.src = imageData3.imageUrl;
-  
     if (imageData1.imageId) {
         recent_img1.dataset.imageId = imageData1.imageId;
         recent_img1.dataset.imageName = imageData1.userName;
     }
+
+    const imageData2 = await fetchImage(2);
+    recent_img2.src = imageData2.imageUrl;
     if (imageData2.imageId) {
         recent_img2.dataset.imageId = imageData2.imageId;
         recent_img2.dataset.imageName = imageData2.userName;
     }
+
+    const imageData3 = await fetchImage(3);
+    recent_img3.src = imageData3.imageUrl;
     if (imageData3.imageId) {
         recent_img3.dataset.imageId = imageData3.imageId;
         recent_img3.dataset.imageName = imageData3.userName;
     }
+}
+
+async function updateImages() {
+    // only the 3rd image needs to be requested
+    const imageData3 = await fetchImage(3);
+    recent_img3.src = imageData3.imageUrl;
+    if (imageData3.imageId) {
+        recent_img3.dataset.imageId = imageData3.imageId;
+        recent_img3.dataset.imageName = imageData3.userName;
+    }
+
+    recent_img1.src = recent_img2.src;
+    recent_img1.dataset.imageId = recent_img2.dataset.imageId;
+    recent_img1.dataset.imageName = recent_img2.dataset.imageName;
+
+    recent_img2.src = recent_img3.src;
+    recent_img2.dataset.imageId = recent_img3.dataset.imageId;
+    recent_img2.dataset.imageName = recent_img3.dataset.imageName;
 }
 
 displayImages(); //on page load
