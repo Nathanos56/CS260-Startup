@@ -47,7 +47,6 @@ const secretKey = config.secretKey;
 
 async function validateCredentials(email, password) {
   try {
-    // await client.connect();
     const db = client.db('cred');
     const usersCollection = db.collection('admin');
 
@@ -65,10 +64,7 @@ async function validateCredentials(email, password) {
       return null; // Invalid password
     }
   } catch (err) {
-    // Handle errors
     return null;
-  } finally {
-    // await client.close();
   }
 }
 
@@ -107,13 +103,14 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
 // still working on this
 app.delete('/reject-api', checkToken, async (req, res, next) => {
   try {
-    // await client.connect();
     const db = client.db('img');
     const imagesCollection = db.collection('user');
 
     // const imgID = req.body.id;
-    // const imgID = new ObjectId(req.body.id);
-    const imgID = ObjectId.createFromHexString(req.body.id);
+    const imgID = new ObjectId(req.body.id);
+    // const imgID = ObjectId.createFromHexString(req.body.id);
+    console.log(req.body);
+    console.log(req.body.id);
 
     const deleteResult = await imagesCollection.deleteOne({ _id: imgID });
 
@@ -122,7 +119,6 @@ app.delete('/reject-api', checkToken, async (req, res, next) => {
     } else {
       res.json({ message: 'The image was not deleted' });
     }
-    // await client.close();
   } catch (err) {
     res.json({ message: 'ERROR Deleting img: ' + err.message });
   }
@@ -142,7 +138,6 @@ function checkToken(req, res, next) {
 
 app.post('/admin-img', checkToken, async (req, res, next) => {
   try {
-    // await client.connect();
     const db = client.db('img');
     const imagesCollection = db.collection('user');
 
@@ -156,8 +151,6 @@ app.post('/admin-img', checkToken, async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-  } finally {
-    // await client.close();
   }
 
 });
@@ -179,7 +172,6 @@ const upload = multer({ storage, limits, fileFilter });
 
 app.post('/upload', upload.single('image'), async (req, res) => {
   try {
-    // await client.connect();
     const db = client.db('img');
     const imagesCollection = db.collection('user');
 
@@ -202,8 +194,6 @@ app.post('/upload', upload.single('image'), async (req, res) => {
       console.error(err.message);
       res.status(500).json({ message: 'Failed to upload image' });
     }
-  } finally {
-    // await client.close();
   }
 });
 

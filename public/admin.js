@@ -160,25 +160,18 @@ accept_button.addEventListener('click', () => {
 reject_button.addEventListener('click', () => {
     fetch('/reject-api', {
         method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         body: JSON.stringify({ id: recent_img1.dataset.imageId })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+        console.error('Error:', error);
     });
     updateImages();
 });
-
-function sendToken(api) {
-    fetch(api, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + localStorage.getItem("accessToken") // user's token
-        }
-      })
-      .then(response => response.json())
-      .then(data => console.log(data.message))
-      .catch((error) => {
-        console.error('Error:', error);
-    });
-}
 
 
 // display images
