@@ -39,6 +39,9 @@ async function hashPassword(password) {
 }
 
 
+// GOOGLE DRIVE API
+
+
 
 
 
@@ -61,7 +64,7 @@ async function validateCredentials(email, password) {
     if (isMatch) {
       return user; // Credentials valid
     } else {
-      return null; // Invalid password
+      return null;
     }
   } catch (err) {
     return null;
@@ -97,20 +100,24 @@ app.get('/admin', checkToken, (req, res) => {
 });
 
 app.post('/accept-api', checkToken, async (req, res, next) => {
-  
+  try {
+    const db = client.db('img');
+    const imagesCollection = db.collection('user');
+    const imgID = new ObjectId(req.body.id);
+
+    // ADD CODE FOR SENIDNG IMAGE TO GOOGLE DRIVE
+    
+  } catch (err) {
+    res.json({ message: 'ERROR accepting img: ' + err.message });
+  }
 });
 
-// still working on this
 app.delete('/reject-api', checkToken, async (req, res, next) => {
   try {
     const db = client.db('img');
     const imagesCollection = db.collection('user');
-
-    // const imgID = req.body.id;
     const imgID = new ObjectId(req.body.id);
     // const imgID = ObjectId.createFromHexString(req.body.id);
-    console.log(req.body);
-    console.log(req.body.id);
 
     const deleteResult = await imagesCollection.deleteOne({ _id: imgID });
 

@@ -154,7 +154,19 @@ const recent_img2 = document.getElementById('recent-2');
 const recent_img3 = document.getElementById('recent-3');
 
 accept_button.addEventListener('click', () => {
-    sendToken('/accept-api');
+    fetch('/accept-api', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: recent_img1.dataset.imageId })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+    updateImages();
 });
 
 reject_button.addEventListener('click', () => {
