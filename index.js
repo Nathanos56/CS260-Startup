@@ -6,6 +6,9 @@ const multer = require('multer');
 const cookieParser = require('cookie-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
+const { google } = require('googleapis');
+const fs = require('fs');
+const { Readable } = require('stream');
 
 app.use(cookieParser());
 app.use(express.json());;
@@ -40,7 +43,44 @@ async function hashPassword(password) {
 
 
 // GOOGLE DRIVE API
+const key = require('./driveAPIConfig.json');
 
+// const jwtClient = new google.auth.JWT(
+//   key.client_email,
+//   null,
+//   key.private_key,
+//   ['https://www.googleapis.com/auth/drive'], // Define the scopes
+//   null
+// );
+
+// jwtClient.authorize(err => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+
+//   const drive = google.drive({ version: 'v3', auth: jwtClient });
+//   const fileMetadata = {
+//     name: 'aiWin.jpg', // Replace with filename from user
+//     parents: [key.allowed_folder] // folder shared with the service account
+//   };
+//   const media = {
+//     mimeType: 'image/jpeg', // Replace with your file's MIME type
+//     body: fs.createReadStream('public/images/aiWin.jpg')
+//   };
+
+//   drive.files.create({
+//     resource: fileMetadata,
+//     media: media,
+//     fields: 'id'
+//   }, (err, file) => {
+//     if (err) {
+//       console.error(err);
+//     } else {
+//       console.log('Uploaded File Id: ', file.id);
+//     }
+//   });
+// });
 
 
 
@@ -105,14 +145,68 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
     const imagesCollection = db.collection('user');
     const imgID = new ObjectId(req.body.id);
 
-    // ADD CODE FOR SENIDNG IMAGE TO GOOGLE DRIVE
+    const image = await imagesCollection.findOne({ _id: imgID });
+
+    if (!image) {
+      res.json({ message: 'Image not found' });
+      return;
+    }
+
+    const imageStream = new Readable();
+    imageStream.push(image.image.buffer);
+    imageStream.push(null); // flush
+
+    const jwtClient = new google.auth.JWT(
+      key.client_email,
+      null,
+      key.private_key,
+      ['https://www.googleapis.com/auth/drive'],
+      null
+    );
+
+    jwtClient.authorize(err => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      const drive = google.drive({ version: 'v3', auth: jwtClient });
+      const fileMetadata = {
+        name: `${imgID}.jpg`,
+        parents: [key.allowed_folder]
+      };
+      const media = {
+        mimeType: "image/jpeg", 
+        body: imageStream
+      };
+
+      drive.files.create({
+        resource: fileMetadata,
+        media: media,
+        fields: 'id'
+      }, async (err, file) => {
+        if (err) {
+          console.error(err);
+          res.json({ message: 'ERROR Uploading img: ' + err.message });
+        } else {
+          // delete image from MongoDB after successful upload to Google Drive
+          const deleteResult = await imagesCollection.deleteOne({ _id: imgID });
+          if (deleteResult.deletedCount === 1) {
+            console.log('Image deleted successfully from MongoDB');
+          } else {
+            console.log('The image was not deleted from MongoDB');
+          }
+          res.json({ message: 'Image uploaded successfully', fileId: file.id });
+        }
+      });
+    });
     
   } catch (err) {
     res.json({ message: 'ERROR accepting img: ' + err.message });
   }
 });
 
-app.delete('/reject-api', checkToken, async (req, res, next) => {
+app.delete('/reject-api', checkToken, async (req, res) => {
   try {
     const db = client.db('img');
     const imagesCollection = db.collection('user');
@@ -143,7 +237,7 @@ function checkToken(req, res, next) {
   });
 };
 
-app.post('/admin-img', checkToken, async (req, res, next) => {
+app.post('/admin-img', checkToken, async (req, res) => {
   try {
     const db = client.db('img');
     const imagesCollection = db.collection('user');
