@@ -51,5 +51,16 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - I am also using local storage to remember the user's light/dark mode preferences.
 - My name and GitHub link are in the footer.
 
+## Startup Service Deliverable
+- The website uses node.js and Express to serve data
+- I am using the Google Drive API as my 3rd party service endpoint. It would be insecure to give the front end the data needed to call the Google Drive API. For security's sake, the frontend makes an API call to my back end which then makes the API call to Google Drive.
+- My back end hosts several service endpoints including:
+  - Accept-api: an API for the admin page that accepts user images and uploads them to Google Drive
+  - Reject-api: an API for the admin page that rejects user images and deletes them from the MongoDB database
+  - Admin-img: an API that displays user images from the MongoDB database on the admin page 
+  - Upload: an API for users to upload their images to the MongoDB database
+  - recent-images-api: an API for the homepage that grabs the three most recent images in the Google Drive
+- These endpoints are called from the front end
+
 ## Websocket Deliverable
 - 
