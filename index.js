@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const { google } = require('googleapis');
 // const fs = require('fs');
 const { Readable } = require('stream');
-const key = require('./public/driveAPIConfig.json');
+const key = require('./driveAPIConfig.json');
 
 app.use(cookieParser());
 app.use(express.json());;
@@ -17,7 +17,7 @@ app.use(express.json());;
 
 
 // MONGODB
-const config = require('./public/dbConfig.json');
+const config = require('./dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 let client = new MongoClient(url);
 
