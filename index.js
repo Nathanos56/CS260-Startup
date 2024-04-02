@@ -318,4 +318,4 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(3000, () => console.log('Server listening on port 3000'));
+app.listen(port, () => console.log('Server listening on port 3000'));
