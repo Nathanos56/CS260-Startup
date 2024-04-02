@@ -51,7 +51,7 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - I am also using local storage to remember the user's light/dark mode preferences.
 - My name and GitHub link are in the footer.
 
-## Startup Service Deliverable
+## Service Deliverable
 - The website uses node.js and Express to serve data
 - I am using the Google Drive API as my 3rd party service endpoint. It would be insecure to give the front end the data needed to call the Google Drive API. For security's sake, the frontend makes an API call to my back end which then makes the API call to Google Drive.
 - My back end hosts several service endpoints including:
@@ -61,6 +61,14 @@ On campus, students put sticky notes in their windows to write messages or draw 
   - Upload: an API for users to upload their images to the MongoDB database
   - recent-images-api: an API for the homepage that grabs the three most recent images in the Google Drive
 - These endpoints are called from the front end
+
+- ## Login Deliverable
+- This website does not support new user registration because I don't want the public to have access to the admin page. I have created credentials for the TAs that I will delete when the course ends.
+- The users can enter their name on the homepage when they upload an image.
+- Existing users are authenticated and given a token that expires every hour.
+- User images are stored in MongoDB until they are accepted or rejected by an admin.
+- Credentials are also encrypted and stored in MongoDB.
+- Users cannot access the admin page unless they log in. The accept and reject API calls also validate the user (in case the token expires).
 
 ## Websocket Deliverable
 - 
