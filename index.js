@@ -7,8 +7,9 @@ const cookieParser = require('cookie-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 const bcrypt = require('bcrypt');
 const { google } = require('googleapis');
-const fs = require('fs');
+// const fs = require('fs');
 const { Readable } = require('stream');
+const key = require('./driveAPIConfig.json');
 
 app.use(cookieParser());
 app.use(express.json());;
@@ -41,46 +42,6 @@ async function hashPassword(password) {
   return hashedPassword;
 }
 
-
-// GOOGLE DRIVE API
-const key = require('./driveAPIConfig.json');
-
-// const jwtClient = new google.auth.JWT(
-//   key.client_email,
-//   null,
-//   key.private_key,
-//   ['https://www.googleapis.com/auth/drive'], // Define the scopes
-//   null
-// );
-
-// jwtClient.authorize(err => {
-//   if (err) {
-//     console.log(err);
-//     return;
-//   }
-
-//   const drive = google.drive({ version: 'v3', auth: jwtClient });
-//   const fileMetadata = {
-//     name: 'aiWin.jpg', // Replace with filename from user
-//     parents: [key.allowed_folder] // folder shared with the service account
-//   };
-//   const media = {
-//     mimeType: 'image/jpeg', // Replace with your file's MIME type
-//     body: fs.createReadStream('public/images/aiWin.jpg')
-//   };
-
-//   drive.files.create({
-//     resource: fileMetadata,
-//     media: media,
-//     fields: 'id'
-//   }, (err, file) => {
-//     if (err) {
-//       console.error(err);
-//     } else {
-//       console.log('Uploaded File Id: ', file.id);
-//     }
-//   });
-// });
 
 
 
@@ -172,7 +133,7 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
 
       const drive = google.drive({ version: 'v3', auth: jwtClient });
       const fileMetadata = {
-        name: `${imgID}.jpg`,
+        name: `${imgID}`,
         parents: [key.allowed_folder]
       };
       const media = {
@@ -301,7 +262,40 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 
 
 
+// RECENT IMGs
+app.get('/recent-images-api', async (req, res) => {
+  try {
+    // list files in Google Drive folder
+    const jwtClient = new google.auth.JWT(
+      key.client_email,
+      null,
+      key.private_key,
+      ['https://www.googleapis.com/auth/drive'],
+      null
+    );
 
+    jwtClient.authorize(async err => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      const drive = google.drive({ version: 'v3', auth: jwtClient });
+      const response = await drive.files.list({
+        q: `'${key.allowed_folder}' in parents`,
+        orderBy: 'createdTime desc',
+        pageSize: 3,
+        fields: 'files(id, name)',
+      });
+      const files = response.data.files;
+  
+      res.json(files.map(file => file.id));
+    });
+  } catch (err) {
+    console.error('Failed to list images:', err);
+    res.status(500).json({ message: 'Failed to list images' });
+  }
+});
 
 
 

@@ -361,56 +361,29 @@ else {
 
 
 
-// MOCKED SERVER DATA
+// RECENT IMAGES
+
 const recent_1 = document.getElementById('recent-1');
 const recent_2 = document.getElementById('recent-2');
 const recent_3 = document.getElementById('recent-3');
 
-// // const recentImages = [recent_1, recent_2, recent_3];
-// const images = ['aiEarth.png', 'aiGeo.png', 'aiRain.png', 'aiRound.jpg', 'aiWaves.png', 'aiWin.jpg', 'aiWin2.jpg'];
-
-// let i = 0;
-// function mockedRecentImages() {
-//     recent_3.src = recent_2.src;
-//     recent_2.src = recent_1.src;
-//     recent_1.src = 'images/' + images[i % images.length];
-//     ++i;
-// }
-
-// setInterval(mockedRecentImages, 5000); //5s
-
-
-
-
-async function getRecentImageIds() {
-  try {
-    const response = await fetch('recent-images');
-    if (response.ok) {
-      const imageIds = await response.json();
-      return imageIds;
-    } else {
-      console.error('Failed to fetch recent image IDs:', response.statusText);
-      return []; // Handle errors by returning an empty array
-    }
-  } catch (error) {
-    console.error('Error fetching recent image IDs:', error);
-    return []; // Handle errors by returning an empty array
-  }
-}
-
 async function updateRecentImages() {
-  const imageIds = await getRecentImageIds();
-  const currentImageIds = [recent_1.dataset.imageId, recent_2.dataset.imageId, recent_3.dataset.imageId];
-
-  // Check if IDs differ
-  if (!imageIds.every((id, index) => id === currentImageIds[index])) {
-    imageIds.forEach((id, index) => {
-      const imageElement = [recent_1, recent_2, recent_3][index];
-      imageElement.src = `images/${id}`; // Replace with your image path structure
-      imageElement.dataset.imageId = id; // Update data attribute with new ID
+  try {
+    const response = await fetch('/recent-images-api', {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => response.json())
+    .catch((error) => {
+        console.error('Error:', error);
     });
+
+    recent_1.src = `https://drive.google.com/thumbnail?id=${response[0]}`;
+    recent_2.src = `https://drive.google.com/thumbnail?id=${response[1]}`;
+    recent_3.src = `https://drive.google.com/thumbnail?id=${response[2]}`;
+  } catch (err) {
+    console.error('Failed to update images:', err);
   }
 }
-
-updateRecentImages();
-setInterval(updateRecentImages, 10000); // 10s
+updateRecentImages(); // on load
+setInterval(updateRecentImages, 10000);  //10s
