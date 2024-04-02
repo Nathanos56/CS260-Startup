@@ -9,7 +9,7 @@ const bcrypt = require('bcrypt');
 const { google } = require('googleapis');
 // const fs = require('fs');
 const { Readable } = require('stream');
-const key = require('./driveAPIConfig.json');
+const key = require('./public/driveAPIConfig.json');
 
 app.use(cookieParser());
 app.use(express.json());;
@@ -17,7 +17,7 @@ app.use(express.json());;
 
 
 // MONGODB
-const config = require('./dbConfig.json');
+const config = require('./public/dbConfig.json');
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 let client = new MongoClient(url);
 
@@ -318,4 +318,4 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => console.log('Server listening on port 3000'));
+app.listen(port, () => console.log(`Server listening on port ${port}`));
