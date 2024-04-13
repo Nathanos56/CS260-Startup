@@ -1,13 +1,3 @@
-// I need a local file with these
-// const CLIENT_ID = "";
-// const API_KEY = "";
-// const DISCORVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/vs/rest"];
-// const SCOPES = "https://www.googleapis.com/auth/drive";
-
-
-
-
-
 // DARK MODE
 
 const allHTML = document.getElementById('html');

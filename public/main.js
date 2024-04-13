@@ -362,7 +362,7 @@ else {
 
 
 // RECENT IMAGES
-
+// still needs this so it gets images on load
 const recent_1 = document.getElementById('recent-1');
 const recent_2 = document.getElementById('recent-2');
 const recent_3 = document.getElementById('recent-3');
@@ -386,4 +386,28 @@ async function updateRecentImages() {
   }
 }
 updateRecentImages(); // on load
-setInterval(updateRecentImages, 10000);  //10s
+// setInterval(updateRecentImages, 10000);  //10s
+
+
+
+// WEBSOCKET RECENT IMAGES
+const socket = new WebSocket('ws://localhost:3000');
+socket.addEventListener('open', (event) => {
+    socket.send('Hello Server!');
+});
+
+socket.addEventListener('message', (event) => {
+    console.log('Message from server ', event.data);
+    const response = JSON.parse(event.data);
+    recent_1.src = `https://drive.google.com/thumbnail?id=${response[0]}`;
+    recent_2.src = `https://drive.google.com/thumbnail?id=${response[1]}`;
+    recent_3.src = `https://drive.google.com/thumbnail?id=${response[2]}`;
+});
+
+socket.addEventListener('close', (event) => {
+    console.log('Server disconnected ', event);
+});
+
+socket.addEventListener('error', (event) => {
+    console.error('WebSocket error: ', event);
+});

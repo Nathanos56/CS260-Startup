@@ -10,10 +10,14 @@ const { google } = require('googleapis');
 // const fs = require('fs');
 const { Readable } = require('stream');
 const key = require('./driveAPIConfig.json');
+const WebSocket = require('ws');
+const http = require('http');
 
 app.use(cookieParser());
 app.use(express.json());;
 
+const server = http.createServer(app);
+// const wss = new WebSocket.Server({ server });
 
 
 // MONGODB
@@ -161,7 +165,7 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
         }
       });
     });
-    
+    getRecentImages(); // WEBSOCKET
   } catch (err) {
     res.json({ message: 'ERROR accepting img: ' + err.message });
   }
@@ -263,6 +267,7 @@ app.post('/upload', upload.single('image'), async (req, res) => {
 
 
 // RECENT IMGs
+// DEPRECIATED
 app.get('/recent-images-api', async (req, res) => {
   try {
     // list files in Google Drive folder
@@ -319,3 +324,46 @@ app.use((_req, res) => {
 });
 
 app.listen(port, () => console.log(`Server listening on port ${port}`));
+
+
+
+// WEBSOCKET
+const wss = new WebSocket.Server({ noServer: true });
+// RECENT IMAGES 2.0
+async function getRecentImages() {
+  try {
+    // list files in Google Drive folder
+    const jwtClient = new google.auth.JWT(
+      key.client_email,
+      null,
+      key.private_key,
+      ['https://www.googleapis.com/auth/drive'],
+      null
+    );
+
+    jwtClient.authorize(async err => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      const drive = google.drive({ version: 'v3', auth: jwtClient });
+      const response = await drive.files.list({
+        q: `'${key.allowed_folder}' in parents`,
+        orderBy: 'createdTime desc',
+        pageSize: 3,
+        fields: 'files(id, name)',
+      });
+      const files = response.data.files;
+
+      // Send the recent images to all connected clients
+      wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+          client.send(JSON.stringify(files.map(file => file.id)));
+        }
+      });
+    });
+  } catch (err) {
+    console.error('Failed to list images:', err);
+  }
+}
