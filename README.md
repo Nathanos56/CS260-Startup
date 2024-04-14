@@ -71,6 +71,6 @@ On campus, students put sticky notes in their windows to write messages or draw 
 - Users cannot access the admin page unless they log in. The accept and reject API calls also validate the user (in case the token expires).
 
 ## Websocket Deliverable
-The backend listens for WebSocket connection and the frontend starts the connection
+- The backend listens for WebSocket connection and the frontend starts the connection
 - When an admin accepts an image, the backend sends updated URLs for recent images to all connected clients
 - The frontend then displays these new URLs as images on the main page
