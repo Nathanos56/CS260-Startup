@@ -380,7 +380,7 @@ async function updateRecentImages() {
 
     recent_1.src = `https://drive.google.com/thumbnail?id=${response[0]}`;
     recent_2.src = `https://drive.google.com/thumbnail?id=${response[1]}`;
-    recent_3.src = `https://drive.google.com/thumbnail?id=${response[2]}`;
+    recent_3.src = response[2] ? `https://drive.google.com/thumbnail?id=${response[2]}` : 'images/stockImage.png';
   } catch (err) {
     console.error('Failed to update images:', err);
   }
@@ -391,23 +391,30 @@ updateRecentImages(); // on load
 
 
 // WEBSOCKET RECENT IMAGES
-const socket = new WebSocket('ws://localhost:3000');
-socket.addEventListener('open', (event) => {
-    socket.send('Hello Server!');
-});
+const socket = new WebSocket('ws://localhost:3100');
+socket.onopen = function(e) {
+    console.log("Connection established");
+    console.log("Sending test message to server");
+    socket.send("Hello Server!");
+};
 
-socket.addEventListener('message', (event) => {
+socket.onmessage = function (event) {
     console.log('Message from server ', event.data);
     const response = JSON.parse(event.data);
-    recent_1.src = `https://drive.google.com/thumbnail?id=${response[0]}`;
-    recent_2.src = `https://drive.google.com/thumbnail?id=${response[1]}`;
-    recent_3.src = `https://drive.google.com/thumbnail?id=${response[2]}`;
-});
+    console.log('Message from server ', response);
+    recent_1.src = response[0] ? `https://drive.google.com/thumbnail?id=${response[0]}` : 'images/stockImage.png';
+    recent_2.src = response[1] ? `https://drive.google.com/thumbnail?id=${response[1]}` : 'images/stockImage.png';
+    recent_3.src = response[2] ? `https://drive.google.com/thumbnail?id=${response[2]}` : 'images/stockImage.png';
+};
 
-socket.addEventListener('close', (event) => {
-    console.log('Server disconnected ', event);
-});
-
-socket.addEventListener('error', (event) => {
-    console.error('WebSocket error: ', event);
-});
+socket.onclose = function(event) {
+    if (event.wasClean) {
+      console.log(`Connection closed cleanly, code=${event.code} reason=${event.reason}`);
+    } else {
+      console.log('Connection died');
+    }
+};
+  
+socket.onerror = function(error) {
+    console.log(`ERROR: ${error.message}`);
+};

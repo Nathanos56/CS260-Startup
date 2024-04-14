@@ -16,7 +16,7 @@ const http = require('http');
 app.use(cookieParser());
 app.use(express.json());;
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
 // const wss = new WebSocket.Server({ server });
 
 
@@ -162,10 +162,10 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
             console.log('The image was not deleted from MongoDB');
           }
           res.json({ message: 'Image uploaded successfully', fileId: file.id });
+          getRecentImages(); // WEBSOCKET
         }
       });
     });
-    getRecentImages(); // WEBSOCKET
   } catch (err) {
     res.json({ message: 'ERROR accepting img: ' + err.message });
   }
@@ -328,7 +328,46 @@ app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 
 // WEBSOCKET
+let pingTimeout;
 const wss = new WebSocket.Server({ noServer: true });
+wss.on('connection', (socket) => {
+  socket.isAlive = true;
+
+  socket.on('pong', () => {  // Listen for 'pong' control frames
+    // console.log('Received pong from client');
+    socket.isAlive = true;  // Reset isAlive on receiving "pong"
+  });
+
+  let pingTimeout = setTimeout(() => {
+    socket.ping('', false);
+  }, 10000); //10s
+
+  socket.on('pong', () => {
+    // console.log('Received pong from client');
+    clearTimeout(pingTimeout); 
+    pingTimeout = setTimeout(() => {
+      socket.ping('', false);
+    }, 10000); //10s
+  });
+});
+
+const server = app.listen(3100);
+server.on('upgrade', (request, socket, head) => {
+  wss.handleUpgrade(request, socket, head, socket => {
+    wss.emit('connection', socket, request);
+  });
+});
+
+setInterval(() => {
+  wss.clients.forEach((client) => {
+    if (!client.isAlive && client.readyState === WebSocket.OPEN) {
+      // console.log('Client timed out. Closing connection:', client);
+      client.terminate();
+    }
+    client.isAlive = false;  // Reset isAlive flag for next ping cycle
+  });
+}, 15000); //check for inactive clients every 15s
+
 // RECENT IMAGES 2.0
 async function getRecentImages() {
   try {
@@ -359,6 +398,7 @@ async function getRecentImages() {
       // Send the recent images to all connected clients
       wss.clients.forEach((client) => {
         if (client.readyState === WebSocket.OPEN) {
+          client.send("hey");
           client.send(JSON.stringify(files.map(file => file.id)));
         }
       });
