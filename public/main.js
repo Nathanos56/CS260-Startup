@@ -378,9 +378,9 @@ async function updateRecentImages() {
         console.error('Error:', error);
     });
 
-    recent_1.src = `https://drive.google.com/thumbnail?id=${response[0]}`;
-    recent_2.src = `https://drive.google.com/thumbnail?id=${response[1]}`;
-    recent_3.src = response[2] ? `https://drive.google.com/thumbnail?id=${response[2]}` : 'images/stockImage.png';
+    recent_1.src = response[0] ? `https://lh3.googleusercontent.com/d/${response[0]}?authuser=0` : 'images/stockImage.png';
+    recent_2.src = response[1] ? `https://lh3.googleusercontent.com/d/${response[1]}?authuser=0` : 'images/stockImage.png';
+    recent_3.src = response[2] ? `https://lh3.googleusercontent.com/d/${response[2]}?authuser=0` : 'images/stockImage.png';
   } catch (err) {
     console.error('Failed to update images:', err);
   }
@@ -391,7 +391,17 @@ updateRecentImages(); // on load
 
 
 // WEBSOCKET RECENT IMAGES
-const socket = new WebSocket('ws://localhost:3100');
+const loc = window.location;
+let wsURL;
+if (loc.protocol === 'https:') {
+  wsURL = 'wss://' + loc.host;
+} else {
+  wsURL = 'ws://' + loc.host;
+}
+wsURL += loc.pathname + '/ws';
+
+// Create new WebSocket connection
+const socket = new WebSocket(wsURL);
 socket.onopen = function(e) {
     console.log("Connection established");
     console.log("Sending test message to server");
@@ -399,12 +409,11 @@ socket.onopen = function(e) {
 };
 
 socket.onmessage = function (event) {
-    console.log('Message from server ', event.data);
     const response = JSON.parse(event.data);
     console.log('Message from server ', response);
-    recent_1.src = response[0] ? `https://drive.google.com/thumbnail?id=${response[0]}` : 'images/stockImage.png';
-    recent_2.src = response[1] ? `https://drive.google.com/thumbnail?id=${response[1]}` : 'images/stockImage.png';
-    recent_3.src = response[2] ? `https://drive.google.com/thumbnail?id=${response[2]}` : 'images/stockImage.png';
+    recent_1.src = response[0] ? `https://lh3.googleusercontent.com/d/${response[0]}?authuser=0` : 'images/stockImage.png';
+    recent_2.src = response[1] ? `https://lh3.googleusercontent.com/d/${response[1]}?authuser=0` : 'images/stockImage.png';
+    recent_3.src = response[2] ? `https://lh3.googleusercontent.com/d/${response[2]}?authuser=0` : 'images/stockImage.png';
 };
 
 socket.onclose = function(event) {

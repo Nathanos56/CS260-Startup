@@ -323,7 +323,7 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => console.log(`Server listening on port ${port}`));
+const server = app.listen(port, () => console.log(`Server listening on port ${port}`));
 
 
 
@@ -351,7 +351,6 @@ wss.on('connection', (socket) => {
   });
 });
 
-const server = app.listen(3100);
 server.on('upgrade', (request, socket, head) => {
   wss.handleUpgrade(request, socket, head, socket => {
     wss.emit('connection', socket, request);
