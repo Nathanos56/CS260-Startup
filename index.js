@@ -162,7 +162,8 @@ app.post('/accept-api', checkToken, async (req, res, next) => {
             console.log('The image was not deleted from MongoDB');
           }
           res.json({ message: 'Image uploaded successfully', fileId: file.id });
-          getRecentImages(); // WEBSOCKET
+          // WEBSOCKET
+          setTimeout(getRecentImages, 2000); // 2s delay
         }
       });
     });
